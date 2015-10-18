@@ -61,13 +61,16 @@
             <button class="btn btn-danger" ng-click="clearLocal()" ng-show="editingMode">Clear</button>
             <button class="btn btn-info" ng-disabled="!edited()" ng-click="saveLocal()" ng-show="editingMode&&edited()">Save</button>
             <button class="btn btn-warning" ng-click="loadDemo(3)">Demo</button>
-            <button class="btn btn-default" ng-click="saveOnServer()" ng-disabled="sosStatus=='Uploading'||(versioningRemote.dataVersion==versioning.dataVersion&&!edited()&&!edited(true))||!edited(true)" ng-show="editingMode&&(edited(true)||sosStatus=='Uploading') && versioningRemote.dataVersion!='-'">
+            <button class="btn btn-default" ng-click="saveOnServer()"
+              ng-disabled="sosStatus=='Uploading'||(versioningRemote.dataVersion==versioning.dataVersion&&!edited()&&!edited(true))||!edited(true)"
+              ng-show="editingMode&&(edited(true)||sosStatus=='Uploading') && versioningRemote.dataVersion!='-' && versioningRemote.dataVersion!='N/A'"
+            >
                <span ng-show="sosStatus!='Uploading'">Upload</span>
                <span ng-show="sosStatus=='Uploading'">Uploading &nbsp; <img src="images/17.gif" height=21 width=21 ></span>
             </button>
             <button class="btn btn-default" ng-click="getRemote()"
               ng-disabled="sosStatus=='Loading'||(versioningRemote.dataVersion==versioning.dataVersion&&!dataEdited)"
-              ng-show="((versioningRemote.dataVersion!=versioning.dataVersion||dataEdited)||sosStatus=='Loading')&&gvSt!='Getting' && versioningRemote.dataVersion!='-'"
+              ng-show="((versioningRemote.dataVersion!=versioning.dataVersion||dataEdited)||sosStatus=='Loading')&&gvSt!='Getting' && versioningRemote.dataVersion!='-' && versioningRemote.dataVersion!='N/A'"
             >
               <span ng-show="sosStatus!='Loading'">Download</span>
               <span ng-show="sosStatus=='Loading'">Downloading &nbsp; <img src="images/17.gif" height=21 width=21 ></span>
@@ -243,7 +246,9 @@
           <div class="glyphicon glyphicon-alert"></div>
           EPDS unavailable
           &nbsp;
-          <button class="btn btn-default" ng-click="pingEpdsFn()" ng-disabled="pingEpdsStatus==1">
+          <button class="btn btn-default" ng-click="pingEpdsFn()" ng-disabled="pingEpdsStatus==1||!config.api.EPDS"
+            title="If this button is disabled, then it might be because the EPDS is not configured in the Back-end tab"
+          >
             <span ng-show="pingEpdsStatus!=1">Check again</span>
             <span ng-show="pingEpdsStatus==1">Checking...</span>
           </button>
@@ -923,7 +928,9 @@
         <div class="text-center alert alert-danger" role="alert" ng-show="!eadsAvail" ng-controller="EADSPing">
           <div class="glyphicon glyphicon-alert"></div>
           EADS unavailable
-          <button ng-click="pingEads()" ng-disabled="pingStatus!=0" class="btn btn-warning">
+          <button ng-click="pingEads()" ng-disabled="pingStatus!=0||!config.api.EADS" class="btn btn-warning"
+            title="If this button is disabled, then it might be because the EADS is not configured in the Back-end tab"
+          >
             <span ng-show="pingStatus==0">Try again</span>
             <span ng-show="pingStatus==1">Trying...</span>
           </button>
@@ -1634,7 +1641,6 @@
 	    <input ng-model="config.api.EADS" placeholder="api/getEads.php" />
 	  </span>
 	</li>
-      </ul>
         <li>EPDS:
 	  <span ng-show="!editingMode && !!config.api.EPDS">{{config.api.EPDS}}</span>
 	  <span ng-show="!editingMode && !config.api.EPDS">Not configured</span>
@@ -1656,7 +1662,9 @@
         <tr>
           <td>Remote Data Version &nbsp;</td>
           <td style="text-align:left">{{versioningRemote.dataVersion}} &nbsp;
-            <button class="btn btn-xs btn-default" ng-click="getVersion()" ng-disabled="gvSt=='Getting'">
+            <button class="btn btn-xs btn-default" ng-click="getVersion()" ng-disabled="gvSt=='Getting'||!config.api.ServerVersion"
+              title="If this button is disabled, then it might be because the ServerVersion is not configured in the Back-end tab"
+            >
                <span ng-show="gvSt!='Getting'">
                  Refresh
                </span>
