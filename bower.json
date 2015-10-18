@@ -1,5 +1,5 @@
 {
-    "name":  "dis-man",
+    "name":  "the-allocator",
     "version": "0.0.1",
     "dependencies": {
         "angular": "1.4.7",
