@@ -15,9 +15,6 @@ install:
 	cp bower_components/jquery-ui/themes/base/images/ui-icons_ffffff_256x240.png www/css/vendor/images/
 
 publish: install
-	tar -czf the-allocator-www.tgz www/*
-	git checkout gh-pages
-	tar -xzf the-allocator-www.tgz
 	cd www/
 	tar -czf the-allocator-www.tgz *
 	cd ..
