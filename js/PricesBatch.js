@@ -63,7 +63,7 @@ function PricesBatch($scope,$http) {
                   pxDate: response.data[rd].pxDate, // $scope.epdsFetchDate,
                   px: response.data[rd].px,
                   currency: response.data[rd].currency,
-                  source: "EPDS"
+                  source: $scope.$parent.getEpdsName()
                 };
               }
             }
