@@ -12,7 +12,8 @@ function Main($scope) {
     api: {
       ServerVersion: "",
       EADS: "",
-      EPDS: ""
+      EPDS: "",
+      excel: ""
     }
   };
   $scope.config = angular.fromJson(angular.toJson($scope.configInit));
