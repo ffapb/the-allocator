@@ -1,6 +1,12 @@
 www/npm-debug.log
 bower_components
 www/js/vendor/*
+!www/js/vendor/empty.txt
 www/css/vendor/*
+!www/css/vendor/empty.txt
+!www/css/vendor/images
+www/css/vendor/images/*
+!www/css/vendor/images/empty.txt
 www/css/fonts/*
+!www/css/fonts/empty.txt
 vendor/*
