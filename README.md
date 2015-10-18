@@ -65,5 +65,14 @@ Licensed under the WTFPL. Check [LICENSE] for the full license text.
 
 # Publishing to gh-pages
 
+First checkout of remote branch locally
+
+    git checkout -b gh-pages origin/gh-pages
+
+Copying files from master to gh-pages
+
     make publish
 
+Finally, return to master branch
+
+    git checkout master
