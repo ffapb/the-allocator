@@ -56,6 +56,7 @@ function AllocationAddEdit($scope,$timeout) {
   $scope.allocSet = function(al,v) {
     al.allocation=v;
     $scope.$emit("edited");
+    $scope.setAggregates2();
   };
 
   $scope.editAllocCore = function(al) {
