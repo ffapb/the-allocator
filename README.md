@@ -1,6 +1,8 @@
 # The Allocator
 The Allocator helps an asset manager replicate his/her strategy's allocations onto client accounts
 
+It is published at http://shadiakiki1986.github.io/the-allocator/
+
 # Alternatives
 Check [Alternatives]
 
