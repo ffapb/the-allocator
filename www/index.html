@@ -51,9 +51,9 @@
           <h2>
             <span ng-show="!editingMode">&nbsp; {{config.title1}}<small>{{config.title2}}</small></span>
             <span ng-show=" editingMode">
-              <input ng-model="config.title1" placeholder="Title for page" style="width:20em" />
+              <input ng-model="config.title1" placeholder="Title for page" style="width:20em" ng-change="emitEdited()" />
               <br>
-              <input ng-model="config.title2" placeholder="Subtitle for page" style="width:20em" />
+              <input ng-model="config.title2" placeholder="Subtitle for page" style="width:20em" ng-change="emitEdited()" />
             </span>
           </h2>
         </div>
