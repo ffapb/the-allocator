@@ -1,0 +1,6 @@
+www/npm-debug.log
+bower_components
+www/js/vendor/*
+www/css/vendor/*
+www/css/fonts/*
+vendor/*
