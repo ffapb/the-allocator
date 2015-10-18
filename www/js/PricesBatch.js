@@ -127,6 +127,11 @@ function PricesBatch($scope,$http) {
   $scope.epdsAvailable = false;
   $scope.pingEpdsStatus = 0;
   $scope.pingEpdsFn = function() {
+        if(!$scope.$parent.config.api.EPDS) {
+          console.log("EPDS not configured");
+          return;
+        }
+
         $scope.pingEpdsStatus = 1;
         $http({
           url: "api/fetchEpds.php",

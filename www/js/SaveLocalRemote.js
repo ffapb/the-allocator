@@ -97,9 +97,7 @@ function SaveLocalRemote($scope,$http) {
     $scope.$parent.prices = {};
     $scope.$parent.trades = [];
     $scope.$parent.partialRedemptions = {};
-    $scope.$parent.config = {
-      "riskThreshold": 0
-    };
+    $scope.$parent.config = $scope.$parent.configInit;
     $scope.$parent.versioning = {};
   };
 

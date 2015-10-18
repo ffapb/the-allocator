@@ -49,11 +49,10 @@
     <div class="row" ng-controller="SaveLocalRemote">
         <div class="pull-left">
           <h2>
-            <span ng-show="!editingMode">&nbsp; {{config.title1}}<small>{{config.title2}}</small></span>
+            <span ng-show="!editingMode">&nbsp; {{config.title1}} &nbsp; <small>{{config.title2}}</small></span>
             <span ng-show=" editingMode">
-              <input ng-model="config.title1" placeholder="Title for page" style="width:20em" ng-change="emitEdited()" />
-              <br>
-              <input ng-model="config.title2" placeholder="Subtitle for page" style="width:20em" ng-change="emitEdited()" />
+              <input ng-model="config.title1" placeholder="Title for page" style="width:10em" ng-change="emitEdited()" />
+              <input ng-model="config.title2" placeholder="Subtitle for page" style="width:10em" ng-change="emitEdited()" />
             </span>
           </h2>
         </div>
@@ -62,13 +61,13 @@
             <button class="btn btn-danger" ng-click="clearLocal()" ng-show="editingMode">Clear</button>
             <button class="btn btn-info" ng-disabled="!edited()" ng-click="saveLocal()" ng-show="editingMode&&edited()">Save</button>
             <button class="btn btn-warning" ng-click="loadDemo(3)">Demo</button>
-            <button class="btn btn-default" ng-click="saveOnServer()" ng-disabled="sosStatus=='Uploading'||(versioningRemote.dataVersion==versioning.dataVersion&&!edited()&&!edited(true))||!edited(true)" ng-show="editingMode&&(edited(true)||sosStatus=='Uploading')">
+            <button class="btn btn-default" ng-click="saveOnServer()" ng-disabled="sosStatus=='Uploading'||(versioningRemote.dataVersion==versioning.dataVersion&&!edited()&&!edited(true))||!edited(true)" ng-show="editingMode&&(edited(true)||sosStatus=='Uploading') && versioningRemote.dataVersion!='-'">
                <span ng-show="sosStatus!='Uploading'">Upload</span>
                <span ng-show="sosStatus=='Uploading'">Uploading &nbsp; <img src="images/17.gif" height=21 width=21 ></span>
             </button>
             <button class="btn btn-default" ng-click="getRemote()"
               ng-disabled="sosStatus=='Loading'||(versioningRemote.dataVersion==versioning.dataVersion&&!dataEdited)"
-              ng-show="((versioningRemote.dataVersion!=versioning.dataVersion||dataEdited)||sosStatus=='Loading')&&gvSt!='Getting'"
+              ng-show="((versioningRemote.dataVersion!=versioning.dataVersion||dataEdited)||sosStatus=='Loading')&&gvSt!='Getting' && versioningRemote.dataVersion!='-'"
             >
               <span ng-show="sosStatus!='Loading'">Download</span>
               <span ng-show="sosStatus=='Loading'">Downloading &nbsp; <img src="images/17.gif" height=21 width=21 ></span>
@@ -142,8 +141,7 @@
         </a>
       </li>
       <li><a href="#PartialRedemption">Partial Redemptions / Subscriptions <span class="badge">{{partialRedemptionsLength()}}</span></a></li>
-      <!--<li><a href="#tabs-9">Backtesting</a></li>-->
-      <!--<li><a href="#tabs-10">Configure</a></li>-->
+      <li><a href="#Backend">Back-end</a></li>
     </ul>
 
     <div id="Summary">
@@ -188,7 +186,7 @@
             </td>
           </tr>
         </tbody>
-        <thead>
+        <thead ng-show="performanceTimestamps().length!=0">
           <tr>
             <th>SI</th>
             <th ng-repeat="st in strategies" class="mynumbertd">{{calcSI(st)|number:2}} %</th>
@@ -1265,7 +1263,7 @@
           <div id="Account_Portfolio" style="overflow:auto">
             <div class="text-center alert alert-danger" ng-show="newAccount.fromEADS&&editingMode">You cannot add/delete securities to/from this account because it is linked to EADS</div>
             <div class="form-inline" ng-controller="AccountSecurity">
-                <div ng-show="!newAccount.fromEADS">
+              <div ng-show="!newAccount.fromEADS && editingMode">
                 <button class="btn btn-info form-control" ng-click="addAccountSecurity(newAccount.id)" ng-disabled="newAccount.fromEADS||newAccountSecurityExists()">Add</button>
                 <label>
                   &nbsp;Security:
@@ -1618,7 +1616,35 @@
         </tbody>
       </table>
 
-    </div>
+    </div><!-- end partial redemptions -->
+
+    <div id="Backend">
+      <ul>
+        <li>Server version:
+	  <span ng-show="!editingMode && !!config.api.ServerVersion">{{config.api.ServerVersion}}</span>
+	  <span ng-show="!editingMode && !config.api.ServerVersion">Not configured</span>
+	  <span ng-show=" editingMode">
+	    <input ng-model="config.api.ServerVersion" placeholder="api/ServerVersion.php" />
+	  </span>
+	</li>
+        <li>EADS:
+	  <span ng-show="!editingMode && !!config.api.EADS">{{config.api.EADS}}</span>
+	  <span ng-show="!editingMode && !config.api.EADS">Not configured</span>
+	  <span ng-show=" editingMode">
+	    <input ng-model="config.api.EADS" placeholder="api/getEads.php" />
+	  </span>
+	</li>
+      </ul>
+        <li>EPDS:
+	  <span ng-show="!editingMode && !!config.api.EPDS">{{config.api.EPDS}}</span>
+	  <span ng-show="!editingMode && !config.api.EPDS">Not configured</span>
+	  <span ng-show=" editingMode">
+	    <input ng-model="config.api.EPDS" placeholder="api/fetchEpds.php" />
+	  </span>
+	</li>
+      </ul>
+
+    </div><!-- end backend -->
 
     <br><br><br>
 

@@ -52,7 +52,7 @@ function loadDemo3() {
         "feesMan": 0.5,
         "feesOther": 0,
         "feesEntry": 0.95,
-        "strategy": "Strat2",
+        "strategy": "Strat1",
         "cash": 3019,
         "fromEADS": false,
         "allocations": {
@@ -212,224 +212,224 @@ function loadDemo3() {
         "name": "Security 1 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "US EQUITIES"
+        "classOriginal": "US EQUITIES"
       },
       "SEC 2":  {
         "id": "SEC 2",
         "name": "Security 2 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "US EQUITIES"
+        "classOriginal": "US EQUITIES"
       },
       "SEC 3":    {
         "id": "SEC 3",
         "name": "Security 3 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "US EQUITIES"
+        "classOriginal": "US EQUITIES"
        },
       "SEC 4": {
         "id": "SEC 4",
         "name": "Security 4 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "US EQUITIES"
+        "classOriginal": "US EQUITIES"
       },
       "SEC 5":  {
         "id": "SEC 5",
         "name": "Security 5 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "US EQUITIES"
+        "classOriginal": "US EQUITIES"
       },
       "SEC 6":  {
         "id": "SEC 6",
         "name": "Security 6 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "ALTERNATIVE FUNDS"
+        "classOriginal": "ALTERNATIVE FUNDS"
       },
       "SEC 7":  {
         "id": "SEC 7",
         "name": "Security 7 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "ALTERNATIVE FUNDS"
+        "classOriginal": "ALTERNATIVE FUNDS"
       },
       "SEC 15":  {
         "id": "SEC 15",
         "name": "Security 15 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "US EQUITIES"
+        "classOriginal": "US EQUITIES"
       },
       "SEC 8":  {
         "id": "SEC 8",
         "name": "Security 8 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "Multi-Asset"
+        "classOriginal": "Multi-Asset"
       },
       "SEC 9":  {
         "id": "SEC 9",
         "name": "Security 9 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "BOND FUNDS"
+        "classOriginal": "BOND FUNDS"
       },
       "SEC 16":  {
         "id": "SEC 16",
         "name": "Security 16 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "US EQUITIES"
+        "classOriginal": "US EQUITIES"
       },
       "SEC 17":  {
         "id": "SEC 17",
         "name": "Security 17 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "US EQUITIES"
+        "classOriginal": "US EQUITIES"
       },
       "SEC 10":  {
         "id": "SEC 10",
         "name": "Security 10 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "BOND FUNDS"
+        "classOriginal": "BOND FUNDS"
       },
       "SEC 25":  {
         "id": "SEC 25",
         "name": "Security 25 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "ALTERNATIVE FUNDS"
+        "classOriginal": "ALTERNATIVE FUNDS"
       },
       "SEC 18":  {
         "id": "SEC 18",
         "name": "SEC 18 fund",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "ALTERNATIVE FUNDS"
+        "classOriginal": "ALTERNATIVE FUNDS"
       },
       "SEC 11":  {
         "id": "SEC 11",
         "name": "Security 11 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "BOND FUNDS"
+        "classOriginal": "BOND FUNDS"
       },
       "SEC 12":  {
         "id": "SEC 12",
         "name": "Security 12 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "BOND FUNDS"
+        "classOriginal": "BOND FUNDS"
       },
       "SEC 13":  {
         "id": "SEC 13",
         "name": "Security 13 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "BOND FUNDS"
+        "classOriginal": "BOND FUNDS"
       },
       "SEC 14":  {
         "id": "SEC 14",
         "name": "Security 14 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "BOND FUNDS"
+        "classOriginal": "BOND FUNDS"
       },
       "SEC 26":  {
         "id": "SEC 26",
         "name": "Security 26 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "BOND FUNDS"
+        "classOriginal": "BOND FUNDS"
       },
       "SEC 27":  {
         "id": "SEC 27",
         "name": "Security 27 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "BOND FUNDS"
+        "classOriginal": "BOND FUNDS"
       },
       "GOLD":  {
         "id": "GOLD",
         "name": "Gold fund",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "Commodities"
+        "classOriginal": "Commodities"
       },
       "OIL":  {
         "id": "OIL",
         "name": "Oil fund",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "Commodities"
+        "classOriginal": "Commodities"
       },
       "SEC 28":  {
         "id": "SEC 28",
         "name": "Security 28 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "BOND FUNDS"
+        "classOriginal": "BOND FUNDS"
       },
       "SEC 29":  {
         "id": "SEC 29",
         "name": "Security 29 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "BOND FUNDS"
+        "classOriginal": "BOND FUNDS"
       },
       "MONEY MARKET":  {
         "id": "MONEY MARKET",
         "name": "Money Market",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "MONEY FUNDS"
+        "classOriginal": "MONEY FUNDS"
       },
       "SEC 23":  {
         "id": "SEC 23",
         "name": "Security 23 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "US EQUITIES"
+        "classOriginal": "US EQUITIES"
       },
       "SEC 24":  {
         "id": "SEC 24",
         "name": "Security 24 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "US EQUITIES"
+        "classOriginal": "US EQUITIES"
       },
       "SEC 22":  {
         "id": "SEC 22",
         "name": "Security 22 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "US EQUITIES"
+        "classOriginal": "US EQUITIES"
       },
       "SEC 21":  {
         "id": "SEC 21",
         "name": "Security 21 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "US EQUITIES"
+        "classOriginal": "US EQUITIES"
       },
       "SEC 19":  {
         "id": "SEC 19",
         "name": "Security 19 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "US EQUITIES"
+        "classOriginal": "US EQUITIES"
       },
       "SEC 20":  {
         "id": "SEC 20",
         "name": "Security 20 name",
         "isin": "bla isin",
         "pxDate": "2015-07-24",
-        "class": "US EQUITIES"
+        "classOriginal": "US EQUITIES"
       }
     },
     "prices": {
