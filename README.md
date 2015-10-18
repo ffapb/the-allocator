@@ -62,3 +62,11 @@ I will write more on the API end-points data format later
 
 # License
 Licensed under the WTFPL. Check [LICENSE] for the full license text.
+
+# Publishing to gh-pages
+
+    make install
+    tar -czf www/* the-allocator-www.tgz
+    git checkout gh-pages
+    tar -xzf the-allocator-www.tgz
+
