@@ -229,4 +229,14 @@ function Main($scope) {
       return Object.keys(ac.performance).length;
   };
 
+  $scope.getEadsName = function() {
+    if(!$scope.config.api.EadsName) return "EADS";
+    return $scope.config.api.EadsName;
+  };
+
+  $scope.getEpdsName = function() {
+    if(!$scope.config.api.EpdsName) return "EPDS";
+    return $scope.config.api.EpdsName;
+  };
+
 }

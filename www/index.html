@@ -245,10 +245,10 @@
 
         <div class="text-center alert alert-warning" role="alert" ng-if="!epdsAvailable">
           <div class="glyphicon glyphicon-alert"></div>
-          EPDS unavailable
+          {{getEpdsName()}} unavailable
           &nbsp;
           <button class="btn btn-default" ng-click="pingEpdsFn()" ng-disabled="pingEpdsStatus==1||!config.api.EPDS"
-            title="If this button is disabled, then it might be because the EPDS is not configured in the Back-end tab"
+            title="If this button is disabled, then it might be because the {{getEpdsName()}} is not configured in the Back-end tab"
           >
             <span ng-show="pingEpdsStatus!=1">Check again</span>
             <span ng-show="pingEpdsStatus==1">Checking...</span>
@@ -257,7 +257,7 @@
  
         <div class="form-inline" ng-show="epdsAvailable">
           <div class="form-group has-feedback ng-class: (validDate(epdsFetchDate)?'has-success':(epdsFetchDate.length!=0?'has-error':''))">
-            <label class="control-label" for="epdsFetchDate">EPDS:</label>
+            <label class="control-label" for="epdsFetchDate">{{getEpdsName()}}:</label>
             <input type="text" ng-model="epdsFetchDate" class="form-control" id="epdsFetchDate" placeholder="YYYY-mm-dd" ng-disabled="fbSt=='Getting'">
             <span class="glyphicon glyphicon-ok form-control-feedback" ng-if=" validDate(epdsFetchDate)"></span>
             <span class="glyphicon glyphicon-remove form-control-feedback" ng-if="!validDate(epdsFetchDate)"></span>
@@ -279,12 +279,12 @@
 
         <div class="text-center alert alert-danger" role="alert" ng-if="fbSt=='No data'">
           <div class="glyphicon glyphicon-alert"></div>
-          Fetching from EPDS returned no data.
+          Fetching from {{getEpdsName()}} returned no data.
         </div>
 
         <div class="text-center alert alert-danger" role="alert" ng-if="fbSt=='No matches'">
           <div class="glyphicon glyphicon-alert"></div>
-          Data was returned from the EPDS, but no security ISINs matched.
+          Data was returned from the {{getEpdsName()}}, but no security ISINs matched.
         </div>
 
       </div> <!-- end PricesBatch -->
@@ -455,7 +455,7 @@
                 <tr>
                   <td style="text-align:right;white-space:nowrap">
                     Class (original):
-                    <span title="This class gets overridden by a refresh from EADS, contrary to class manual below">
+                    <span title="This class gets overridden by a refresh from {{getEadsName()}}, contrary to class manual below">
                       <button disabled style="color:pink"><span class="glyphicon glyphicon-flag"></span></button>
                     </span>
                   </td>
@@ -464,7 +464,7 @@
                 <tr>
                   <td style="text-align:right;white-space:nowrap">
                     Class (manual):
-                    <span title="This class does not get overridden by a refresh from EADS">
+                    <span title="This class does not get overridden by a refresh from {{getEadsName()}}">
                       <button disabled style="color:pink"><span class="glyphicon glyphicon-flag"></span></button>
                     </span>
                   </td>
@@ -488,7 +488,7 @@
                       <span ng-show="!testIsin.status">{{testIsin.result}}</span>
                       <div ng-show="!epdsAvailable" class="alert alert-warning">
                         <span class="glyphicon glyphicon-alert"></span>
-                        The EPDS is unreachable. Please check the Prices tab to retry
+                        The {{getEpdsName()}} is unreachable. Please check the Prices tab to retry
                       </div>
                     </div>
                   </td>
@@ -928,9 +928,9 @@
       <div ng-show="editingMode">
         <div class="text-center alert alert-danger" role="alert" ng-show="!eadsAvail" ng-controller="EADSPing">
           <div class="glyphicon glyphicon-alert"></div>
-          EADS unavailable
+          {{getEadsName()}} unavailable
           <button ng-click="pingEads()" ng-disabled="pingStatus!=0||!config.api.EADS" class="btn btn-warning"
-            title="If this button is disabled, then it might be because the EADS is not configured in the Back-end tab"
+            title="If this button is disabled, then it might be because the {{getEadsName()}} is not configured in the Back-end tab"
           >
             <span ng-show="pingStatus==0">Try again</span>
             <span ng-show="pingStatus==1">Trying...</span>
@@ -940,13 +940,13 @@
         <div class="text-center" ng-show="eadsAvail">
           <button ng-click="refreshEADSdata()" class="btn btn-success" ng-disabled="accountsFromEADS().length==0||inprogress==1">
             <span ng-show="inprogress!=1">
-              Refresh EADS data
+              Refresh {{getEadsName()}} data
             </span>
             <span ng-show="inprogress==1">
-              Refreshing EADS data &nbsp; <img src="images/17.gif" height=21 width=21 >
+              Refreshing {{getEadsName()}} data &nbsp; <img src="images/17.gif" height=21 width=21 >
             </span>
           </button>
-          <span ng-show="inprogress==3">Error in EADS connection<span>
+          <span ng-show="inprogress==3">Error in {{getEadsName()}} connection<span>
         </div><!-- end refresh EADS -->
 
       </div><!-- end editingmode -->
@@ -959,7 +959,7 @@
         <caption>Table 1/2: Active Accounts</caption>
         <thead><tr>
            <th><button id="addAccount" ng-show="editingMode" class="btn btn-info">Add account</button></th>
-           <th>From EADS</th>
+           <th>From {{getEadsName()}}</th>
            <th>Account</th>
            <th>Strategy</th>
            <th>Initial Investment</th>
@@ -1031,7 +1031,7 @@
                 <tr>
                   <td>
                     SI &nbsp;
-                    <span title="Calculated based on inflows/outflows in the account performance details. If no inflows/outflows are present, this is just the current nav from the last EADS refresh divided by the initial investment.">
+                    <span title="Calculated based on inflows/outflows in the account performance details. If no inflows/outflows are present, this is just the current nav from the last {{getEadsName()}} refresh divided by the initial investment.">
                       <button disabled style="color:pink"><span class="glyphicon glyphicon-flag"></span></button>
                     </span>
                   </td>
@@ -1088,7 +1088,7 @@
         <thead><tr>
            <th>&nbsp;</th>
            <th>Redemption Status</th>
-           <th>From EADS</th>
+           <th>From {{getEadsName()}}</th>
            <th>Account</th>
            <th>Name</th>
            <th>Strategy</th>
@@ -1123,7 +1123,7 @@
         <table class="table">
         <tr>
           <td>
-            <label><input type="checkbox" ng-model="newAccount.fromEADS" ng-change="possiblesCore()" ng-disabled="!eadsAvail" /> From EADS</label>
+            <label><input type="checkbox" ng-model="newAccount.fromEADS" ng-change="possiblesCore()" ng-disabled="!eadsAvail" /> From {{getEadsName()}}</label>
             <br>{{newAccount.eadsSource}}
           </td>
           <td>
@@ -1147,7 +1147,7 @@
 
             <div class="text-center alert alert-danger" role="alert" ng-if="!eadsAvail&&editingMode">
               <div class="glyphicon glyphicon-alert"></div>
-              EADS unavailable
+              {{getEadsName()}} unavailable
             </div>
             <div class="text-center alert alert-danger" role="alert" ng-if="possiblesCoreStatus==2">
               <div class="glyphicon glyphicon-alert"></div>
@@ -1155,12 +1155,12 @@
             </div>
             <div ng-show="possiblesCoreStatus==1" class="text-warning">Listing possible accounts ...</div>
             <div ng-show="!!typingTimeout" class="text-info">User typing ... </div>
-            <div ng-show="possiblesCoreStatus==3" class="text-danger">No such <i>open</i> account in EADS</div>
+            <div ng-show="possiblesCoreStatus==3" class="text-danger">No such <i>open</i> account in {{getEadsName()}}</div>
             <ul ng-if="possiblesV.length > 1">
               <li ng-repeat="pos in possiblesV">{{pos}} ({{pvSource[pos]}})</li>
             </ul>
-            <div ng-show="inprogress==1" class="text-center alert alert-warning">Loading from EADS {{newAccount.eadsSource}}...</div>
-            <div ng-show="inprogress==3" class="text-center alert alert-danger">Error loading from EADS</div>
+            <div ng-show="inprogress==1" class="text-center alert alert-warning">Loading from {{getEadsName()}} {{newAccount.eadsSource}}...</div>
+            <div ng-show="inprogress==3" class="text-center alert alert-danger">Error loading from {{getEadsName()}}</div>
 
           </td>
           <td class="text-align:right">
@@ -1269,7 +1269,7 @@
           </div><!-- Account_General -->
 
           <div id="Account_Portfolio" style="overflow:auto">
-            <div class="text-center alert alert-danger" ng-show="newAccount.fromEADS&&editingMode">You cannot add/delete securities to/from this account because it is linked to EADS</div>
+            <div class="text-center alert alert-danger" ng-show="newAccount.fromEADS&&editingMode">You cannot add/delete securities to/from this account because it is linked to {{getEadsName()}}</div>
             <div class="form-inline" ng-controller="AccountSecurity">
               <div ng-show="!newAccount.fromEADS && editingMode">
                 <button class="btn btn-info form-control" ng-click="addAccountSecurity(newAccount.id)" ng-disabled="newAccount.fromEADS||newAccountSecurityExists()">Add</button>
@@ -1382,7 +1382,7 @@
                 <tr style="color:grey">
                   <td>
                     {{newAccount.currentDate}}
-                    <span title="Current date and nav from EADS. The nav corresponding to this date only shows up after saving the account."><button disabled style="color:pink"><span class="glyphicon glyphicon-flag"></span></button></span>
+                    <span title="Current date and nav from {{getEadsName()}}. The nav corresponding to this date only shows up after saving the account."><button disabled style="color:pink"><span class="glyphicon glyphicon-flag"></span></button></span>
                   </td>
                   <td>-</td>
                   <td>{{newAccount.currentAmount|number:2}} USD</td>
@@ -1476,7 +1476,7 @@
 
       <div ng-show="viewAs=='securityPooled'">
         <table class="table table-hover">
-          <caption>Trades pooled by source (EADS Lebanon vs EADS Dubai vs Manual), security, and sign ({{tradesPooledBySecurityLength()}} trades)</caption>
+          <caption>Trades pooled by source ({{getEadsName()}} Lebanon vs {{getEadsName()}} Dubai vs Manual), security, and sign ({{tradesPooledBySecurityLength()}} trades)</caption>
           <thead><tr>
             <th>Source</th>
             <th>Security</th>
@@ -1654,6 +1654,20 @@
 	  <span ng-show="!editingMode && !config.api.excel">Not configured</span>
 	  <span ng-show=" editingMode">
 	    <input ng-model="config.api.excel" placeholder="api/export2excel.php" />
+	  </span>
+	</li>
+        <li>EADS Name:
+	  <span ng-show="!editingMode && !!config.api.EadsName">{{config.api.EadsName}}</span>
+	  <span ng-show="!editingMode && !config.api.EadsName">Not configured</span>
+	  <span ng-show=" editingMode">
+	    <input ng-model="config.api.EadsName" placeholder="e.g. Marketflow" />
+	  </span>
+	</li>
+        <li>EPDS Name:
+	  <span ng-show="!editingMode && !!config.api.EpdsName">{{config.api.EpdsName}}</span>
+	  <span ng-show="!editingMode && !config.api.EpdsName">Not configured</span>
+	  <span ng-show=" editingMode">
+	    <input ng-model="config.api.EpdsName" placeholder="e.g. Market map adapter" />
 	  </span>
 	</li>
       </ul>
