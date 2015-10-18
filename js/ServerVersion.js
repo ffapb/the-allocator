@@ -17,8 +17,13 @@ function ServerVersion($scope,$http) {
   $scope.$on("savedOnServer2",function() { $scope.getVersion(); });
 
   $scope.getVersion = function() {
+        if(!$scope.$parent.config.api.ServerVersion) {
+          console.log("get version not configured");
+          return;
+        }
+
         $scope.$parent.gvSt="Getting";
-        $http.get("api/ServerVersion.php").
+        $http.get($scope.$parent.config.api.ServerVersion).
           then(function(response) {
             $scope.versioningRemote.appVersion = response.data.appVersion;
             $scope.versioningRemote.appDate = response.data.appDate;

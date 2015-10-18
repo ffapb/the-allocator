@@ -5,11 +5,18 @@ function Main($scope) {
   $scope.securities = {};
   $scope.prices = {};
   $scope.trades = [];
-  $scope.config = {
+  $scope.configInit = {
     riskThreshold: 0,
     title1: "The Allocator",
-    title2: "by Shadi Akiki"
+    title2: "by Shadi Akiki",
+    api: {
+      ServerVersion: "",
+      EADS: "",
+      EPDS: ""
+    }
   };
+  $scope.config = angular.fromJson(angular.toJson($scope.configInit));
+
   $scope.versioning = {};
   $scope.versioningRemote = {};
   $scope.partialRedemptions = {};

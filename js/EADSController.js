@@ -415,7 +415,8 @@ function EADSController($scope,$http,$q,$timeout) {
 
   $scope.portfolioLength = function() {
     if(!$scope.$parent.newAccount.hasOwnProperty("allocations")) return 0;
-    return Object.keys($scope.$parent.newAccount.allocations).length;
+    var nacal = $scope.$parent.newAccount.allocations;
+    return Object.keys(nacal).filter(function(x) { return nacal[x].allocation!=0; }).length;
   };
 
   $scope.$on("refreshEADSevent",function(event,cid) {
