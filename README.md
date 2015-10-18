@@ -73,6 +73,8 @@ Copying files from master to gh-pages
 
     make publish
 
+If there were any "new" files that were added, a "git add" is needed in "gh-pages" branch followed by a commit and push
+
 Finally, return to master branch
 
     git checkout master
