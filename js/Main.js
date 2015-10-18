@@ -7,7 +7,7 @@ function Main($scope) {
   $scope.trades = [];
   $scope.config = {
     riskThreshold: 0,
-    title1: "The Allocator"
+    title1: "The Allocator",
     title2: "by Shadi Akiki"
   };
   $scope.versioning = {};
