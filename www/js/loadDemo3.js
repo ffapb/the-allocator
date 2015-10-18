@@ -438,7 +438,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 5850.35,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -447,7 +448,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 47.57,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -456,7 +458,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 742.11,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
        },
@@ -465,7 +468,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 33.43,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -474,7 +478,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 63.72,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -483,7 +488,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 11825.52,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -492,7 +498,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 109.67,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -501,7 +508,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 1195.78,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -510,7 +518,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 1140.79,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -519,7 +528,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 1127.66,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -528,7 +538,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 1468.29,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -537,7 +548,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 1129.51,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -546,7 +558,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 1195.78,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -555,7 +568,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 13.028,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -564,7 +578,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 214.72,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -573,7 +588,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 28.75,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -582,7 +598,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 28.59,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -591,7 +608,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 216.57,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -600,7 +618,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 10.21,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -609,7 +628,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 28.42,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -618,7 +638,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 21.61,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -627,7 +648,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 105.35,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -636,7 +658,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 16.03,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -645,7 +668,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 25.03,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -654,7 +678,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 26.25,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -663,7 +688,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 1.16,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -672,7 +698,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 184.30,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -681,7 +708,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 39.73,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -690,7 +718,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 36.44,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -699,7 +728,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 56.64,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -708,7 +738,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 59.38,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       },
@@ -717,7 +748,8 @@ function loadDemo3() {
         "history": {
           "2015-07-24": {
             "px": 208.00,
-            "pxDate": "2015-07-24"
+            "pxDate": "2015-07-24",
+            "source": "Manual"
           }
         }
       }
