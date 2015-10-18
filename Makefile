@@ -18,7 +18,7 @@ publish: install
 	cd www/ && tar -czf the-allocator-www.tgz *
 	git checkout gh-pages
 	mv www/the-allocator-www.tgz .
-	rmdir www/
+	rm -rf www/
 	tar -xzf the-allocator-www.tgz
 	rm the-allocator-www.tgz 
 	git commit -a -m "updating gh-pages from master"
