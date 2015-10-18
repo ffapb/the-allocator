@@ -66,7 +66,17 @@ Licensed under the WTFPL. Check [LICENSE] for the full license text.
 # Publishing to gh-pages
 
     make install
-    tar -czf www/* the-allocator-www.tgz
+    tar -czf the-allocator-www.tgz www/*
     git checkout gh-pages
     tar -xzf the-allocator-www.tgz
+    cd www/
+    tar -czf the1.tgz *
+    cd ..
+    git checkout gh-pages
+    mv www/the1.tgz .
+    rmdir www/
+    tar -xzf the1.tgz 
+    rm the1.tgz 
+    git commit -a -m "updating gh-pages from master"
+    git push
 
