@@ -55,6 +55,7 @@
               <input ng-model="config.title2" placeholder="Subtitle for page" style="width:10em" ng-change="emitEdited()" />
             </span>
             <a href="https://github.com/shadiakiki1986/the-allocator"><img src="images/github.png" /></a>
+            <a href="https://github.com/shadiakiki1986/the-allocator/wiki"><span class="glyphicon glyphicon-info-sign"></span></a>
           </h2>
         </div>
         <div class="pull-right">
@@ -1627,15 +1628,22 @@
     </div><!-- end partial redemptions -->
 
     <div id="Backend">
+      <a href="https://github.com/shadiakiki1986/the-allocator/wiki"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;General Back-end Help</a>
+
       <ul>
-        <li>Server version:
+        <li>
+          Server version
+          :
 	  <span ng-show="!editingMode && !!config.api.ServerVersion">{{config.api.ServerVersion}}</span>
 	  <span ng-show="!editingMode && !config.api.ServerVersion">Not configured</span>
 	  <span ng-show=" editingMode">
 	    <input ng-model="config.api.ServerVersion" placeholder="e.g. api/ServerVersion.php" />
 	  </span>
 	</li>
-        <li>EADS:
+        <li>
+          EADS
+          <a href="https://github.com/shadiakiki1986/the-allocator/wiki/External-Accounts-Data-Source-%28EADS%29"><span class="glyphicon glyphicon-info-sign"></span></a>
+          :
 	  <span ng-show="!editingMode && !!config.api.EADS">{{config.api.EADS}}</span>
 	  <span ng-show="!editingMode && !config.api.EADS">Not configured</span>
 	  <span ng-show=" editingMode">
