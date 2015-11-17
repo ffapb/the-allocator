@@ -528,11 +528,12 @@
           </ul>
           {{selected}}
         </span><!-- end dropdown -->
-        <span class="pull-right">
-          <button id="addStrategy" ng-show="editingMode" class="btn btn-default" ng-disabled=false>Add strategy</button>
-          <button ng-click="delStrategy()" ng-show="editingMode" class="btn btn-danger" ng-disabled="!noAllocations()" title="Delete allocations before deleting the strategy">Delete strategy</button>
+        &nbsp;
+        <span>
+          <button id="addStrategy" ng-show="editingMode" class="btn btn-default" ng-disabled=false title="New strategy"><span class="glyphicon glyphicon-plus"></span></button>
+          <button ng-click="duplicateStrategy()" ng-show="editingMode" class="btn btn-info" title="Duplicate strategy"><span class="glyphicon glyphicon-duplicate"></span></button>
+          <button ng-click="delStrategy()" ng-show="editingMode" class="btn btn-danger" title="Delete strategy" ng-disabled=false><span class="glyphicon glyphicon-remove"></span></button>
         </span>
-
       </div>
       
       <div id="dialog3" title="Strategy">

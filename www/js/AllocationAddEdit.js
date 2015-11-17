@@ -128,4 +128,24 @@ function AllocationAddEdit($scope,$timeout) {
     $scope.resetSelected();
   };
 
+  $scope.delStrategy = function(force) {
+    if(force) {
+      delete $scope.$parent.strategies[$scope.$parent.strategies[$scope.selected].name];
+      $scope.$emit("edited");
+      $scope.resetSelected();
+    } else {
+      if(confirm("Are you sure you want to delete the strategy?")) {
+        $scope.delStrategy(true);
+      }
+    }
+  };
+
+  $scope.duplicateStrategy = function() {
+    var id = $scope.selected + " (Copy)";
+    $scope.$parent.strategies[id] = angular.fromJson(angular.toJson($scope.$parent.strategies[$scope.$parent.strategies[$scope.selected].name]));
+    $scope.$parent.strategies[id].name = id;
+    $scope.$emit("edited");
+    $scope.updateSelected(id);
+  };
+
 }
