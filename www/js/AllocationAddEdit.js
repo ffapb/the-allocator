@@ -34,6 +34,7 @@ function AllocationAddEdit($scope,$timeout) {
     if(!$scope.$parent.strategies[$scope.selected].allocations.hasOwnProperty($scope.newAlloc.id)) {
       $scope.$parent.strategies[$scope.selected].allocations[$scope.newAlloc.id] = {};
     }
+    if(!$scope.newAlloc.allocation) $scope.newAlloc.allocation=0;
     $scope.$parent.strategies[$scope.selected].allocations[$scope.newAlloc.id].id = $scope.newAlloc.id;
     $scope.$parent.strategies[$scope.selected].allocations[$scope.newAlloc.id].allocation = $scope.newAlloc.allocation;
 
