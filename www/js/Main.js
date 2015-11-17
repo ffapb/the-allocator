@@ -57,11 +57,13 @@ function Main($scope) {
 
   $scope.$on("loaded", function() {
     $scope.setAggregates1();
+    $scope.calculatePricesSortedByDate();
     $scope.$broadcast("loaded2");
   });
 
   $scope.$on("edited",function() {
     $scope.setAggregates1();
+    $scope.calculatePricesSortedByDate();
     $scope.$broadcast("edited2");
   });
 
@@ -78,6 +80,29 @@ function Main($scope) {
      }
      return tot;
   };
+
+  $scope.pricesSortField = 'ID';
+  $scope.psfOptions = ['ID','Name','Price date'];
+  $scope.psfArr = [];
+  $scope.calculatePricesSortedByDate = function() {
+    $scope.psfArr = [];
+    for(pr1a in $scope.prices) {
+      pr1 = $scope.prices[pr1a];
+      for(pr2a in pr1.history) {
+        pr2 = pr1.history[pr2a];
+        $scope.psfArr.push({
+          id:pr1.id,
+          name: $scope.securities[pr1.id].name,
+          isin: $scope.securities[pr1.id].isin,
+          pxDate: pr2.pxDate,
+          source: pr2.source,
+          px: pr2.px,
+          currency: pr2.currency
+        });
+      }
+    }
+  };
+
   $scope.tradesLength = function() { return Object.keys($scope.trades).length; };
   $scope.securitiesLength = function() { return Object.keys($scope.securities).length; };
   $scope.accountsLength = function() { return Object.keys($scope.accounts).length; };

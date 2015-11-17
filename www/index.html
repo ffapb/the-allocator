@@ -290,10 +290,14 @@
 
       </div> <!-- end PricesBatch -->
 
-      <table class="table table-hover">
+      Sort by: <select ng-options="psf for psf in psfOptions" ng-model="pricesSortField"></select>
+      <small ng-show="editingMode" style="color:red"> (Only sorting by ID allows for editing prices)</small>
+
+      <table class="table table-hover" ng-show="pricesSortField=='ID'">
         <caption>Table 1/1</caption>
         <thead><tr>
           <th><button class="btn btn-info" id="addPrice" ng-show="editingMode">Add price</button></th>
+          <th>ID</th>
           <th>Security</th>
           <th>ISIN</th>
           <th>Date</th>
@@ -309,11 +313,39 @@
               <button class="btn btn-default" ng-click="editPrice(pr1.id,pr2.pxDate)" ng-show="editingMode" title="Edit price"><span class="glyphicon glyphicon-pencil"></span></button>
               <button class="btn btn-danger" ng-click="delPrice(pr1.id,pr2.pxDate)" ng-show="editingMode" title="Edit price" ng-disabled=false><span class="glyphicon glyphicon-remove"></span></button>
             </td>
+            <td>{{pr1.id}}</td>
             <td>{{securities[pr1.id].name}}</td>
             <td>{{securities[pr1.id].isin}}</td>
             <td>{{pr2.pxDate}}</td>
             <td>{{pr2.source}}</td>
             <td class="mynumbertd">{{pr2.px|number:2}} <small>{{pr2.currency}}</small></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <table class="table table-hover" ng-show="pricesSortField=='Price date'||pricesSortField=='Name'">
+        <caption>Table 1/1</caption>
+        <thead><tr>
+          <th>&nbsp;</th>
+          <th>ID</th>
+          <th>Security</th>
+          <th>ISIN</th>
+          <th>Date</th>
+          <th>Source</th>
+          <th class="mynumbertd">Price</th>
+        </tr></thead>
+        <tbody>
+          <tr ng-show="pricesLength()==0"><td>None</td></tr>
+        </tbody>
+        <tbody>
+          <tr ng-repeat="pr1 in psfArr | orderBy: (pricesSortField=='Price date'?['pxDate','id']:['name','pxDate'])">
+            <td>&nbsp;</td>
+            <td>{{pr1.id}}</td>
+            <td>{{pr1.name}}</td>
+            <td>{{pr1.isin}}</td>
+            <td>{{pr1.pxDate}}</td>
+            <td>{{pr1.source}}</td>
+            <td class="mynumbertd">{{pr1.px|number:2}} <small>{{pr1.currency}}</small></td>
           </tr>
         </tbody>
       </table>
