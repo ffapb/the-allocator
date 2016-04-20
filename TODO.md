@@ -22,4 +22,5 @@
 
 # Set 10
 * `getEads.php` endpoints are currently split by `type=...`. Need to merge all into one endpoint that returns all the data in one shot
+ * 2016-04-20: started this in /the-allocator-config.json ... now need to test all
 * also clean up the Leb vs Dub split
