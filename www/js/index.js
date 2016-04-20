@@ -28,7 +28,7 @@ $(function() {
        angular.element(document.getElementById('AccountAddEdit')).scope().closeDialog();
      }
    });
-  $("#addAccount").click(function() { $("#EADSController").dialog("open"); });
+  $(".addAccount").click(function() { $("#EADSController").dialog("open"); });
   $("#dialog3").dialog({ autoOpen: false, modal: true });
   $("#addStrategy").click(function() { $("#dialog3").dialog("open"); });
   $("#dialog4").dialog({ autoOpen: false, modal: true, width:"50%" });
@@ -54,6 +54,7 @@ app.controller('Trades', Trades);
 app.controller('AccountSecurity', AccountSecurity);
 app.controller('AllocationAddEdit', AllocationAddEdit);
 app.controller('SaveLocalRemote', SaveLocalRemote);
+app.controller('BackendCtrl', BackendCtrl);
 app.controller('EADSController', EADSController);
 app.controller('EADSPing', EADSPing);
 app.controller('SecurityAddEdit', SecurityAddEdit);

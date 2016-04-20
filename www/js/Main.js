@@ -264,4 +264,12 @@ function Main($scope) {
     return $scope.config.api.EpdsName;
   };
 
+  $scope.getEads=function() {
+    if(!$scope.config.api.EADS) {
+      console.log("EADS not configured");
+      return false;
+    }
+    return $scope.config.api.EADS;
+  };
+
 }

@@ -124,13 +124,13 @@ function EADSController($scope,$http,$q,$timeout) {
     
         $scope.possiblesCoreStatus=1;
     
-        var base = "api/getEads.php?type=accounts&prefix=";
+        var base = $scope.$parent.getEads()+"?type=accounts&prefix=";
         $scope.http_get(
             base+$scope.newAccount.id+"&base=Lebanon",
             {timeout: self.canceler.promise}
           ).
           then(function(response) {
-            $scope.possiblesV = $scope.$parent.obj2arr(response.data);
+            $scope.possiblesV = response.data; // $scope.$parent.obj2arr();
             for(pv in $scope.possiblesV) {
                     var pv2 = $scope.possiblesV[pv];
                     $scope.pvSource[pv2] = "Lebanon";
@@ -141,7 +141,7 @@ function EADSController($scope,$http,$q,$timeout) {
                 {timeout: self.canceler.promise}
               ).
               then(function(response) {
-                $scope.possiblesV2 = $scope.$parent.obj2arr(response.data);
+                $scope.possiblesV2 = response.data; // $scope.$parent.obj2arr();
                 for(pv in $scope.possiblesV2) {
                         var pv2 = $scope.possiblesV2[pv];
                         if($scope.pvSource.hasOwnProperty(pv)) {
@@ -192,7 +192,7 @@ function EADSController($scope,$http,$q,$timeout) {
 
   $scope.getAccountDetails = function(cid,target) {
       $scope.$parent.inprogress=1;
-      var base = "api/getEads.php?type=accountsAndBrokersRms&cid=";
+      var base = $scope.$parent.getEads()+"?type=accountsAndBrokersRms&cid=";
       var url = base+cid+(!!target.eadsSource?"&base="+target.eadsSource:"");
       $scope.http_get(url).
         then(function(response) {
@@ -245,7 +245,7 @@ function EADSController($scope,$http,$q,$timeout) {
       // dd: 2014-12-31, 2015-03-30 (if whch=3, this is unused)
       // whch: 1 for navMonthStart, 2 for navYearStart, 3 cash
       // cbfn: callback function with no parameters
-      var base = "api/getEads.php?type=nav";
+      var base = $scope.$parent.getEads()+"?type=nav";
       var url = base+"&cid_="+target.id+"&format=json"+(!!target.eadsSource?"&base="+target.eadsSource:"");
       if(whch!=3) {
         url = url + "&dd="+dd;
@@ -291,7 +291,7 @@ function EADSController($scope,$http,$q,$timeout) {
 
   $scope.getPortfolio = function(cbfn,target) {
       // cbfn: callback function with no parameters
-      var base = "api/getEads.php?type=portfolios";
+      var base = $scope.$parent.getEads()+"?type=portfolios";
       var url = base+"&cid_="+target.id+"&format=json"+(!!target.eadsSource?"&base="+target.eadsSource:"");
       //url+="&dd=2015-08-03";
       $scope.http_get(url).
@@ -325,7 +325,7 @@ function EADSController($scope,$http,$q,$timeout) {
   var trcRe = /^.*(equity|bond|corp)$/i;
   $scope.getSecurityIsins = function(cbfn,target) {
       // cbfn: callback function with no parameters
-      var base = "api/getEads.php?type=securities";
+      var base = $scope.$parent.getEads()+"?type=securities";
       var url = "["+Object.keys(target.allocations).map(function(x) { return '"'+x+'"'; }).join(",")+"]";
       url = base+"&sec="+url+(!!target.eadsSource?"&base="+target.eadsSource:"");
       $scope.http_get(url).
@@ -423,4 +423,5 @@ function EADSController($scope,$http,$q,$timeout) {
     var ac = $scope.$parent.accounts[cid];
     $scope.getAccountDetails(cid,ac);
   });
+
 }

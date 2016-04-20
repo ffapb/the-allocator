@@ -23,6 +23,7 @@
   <script src="js/PricesBatch.js"></script>
   <script src="js/SecuritiesPriceDates.js"></script>
   <script src="js/SecurityAddEdit.js"></script>
+  <script src="js/BackendCtrl.js"></script>
   <script src="js/EADSController.js"></script>
   <script src="js/EADSPing.js"></script>
   <script src="js/SaveLocalRemote.js"></script>
@@ -62,6 +63,7 @@
           <div class="btn-group" role="group">
             <button class="btn btn-danger" ng-click="clearLocal()" ng-show="editingMode">Clear</button>
             <button class="btn btn-info" ng-disabled="!edited()" ng-click="saveLocal()" ng-show="editingMode&&edited()">Save</button>
+
             <button class="btn btn-warning" ng-click="loadDemo(3)">Demo</button>
             <button class="btn btn-default" ng-click="saveOnServer()"
               ng-disabled="sosStatus=='Uploading'||(versioningRemote.dataVersion==versioning.dataVersion&&!edited()&&!edited(true))||!edited(true)"
@@ -82,7 +84,9 @@
           <div class="checkbox">
             <label style="color:{{!!editingMode?'red':'black'}}"><input type="checkbox" ng-model="editingMode" ng-click="updateEditingMode()"> Editing</label>
           </div>
-          <span ng-show="!!config.api.excel"><a href="{{config.api.excel}}">Export uploaded data to excel</a></span>
+          <span ng-show="!!config.api.excel">
+            <a href="{{config.api.excel}}">Export uploaded data to excel</a>
+          </span>
         </div>
 
         <div class="text-center alert alert-danger" role="alert" ng-if="sosStatus=='Error downloading'||sosStatus=='Error uploading'">
@@ -146,6 +150,8 @@
         </a>
       </li>
       <li><a href="#PartialRedemption">Partial Redemptions / Subscriptions <span class="badge">{{partialRedemptionsLength()}}</span></a></li>
+
+
       <li><a href="#Backend">Back-end</a></li>
     </ul>
 
@@ -566,6 +572,7 @@
           <button ng-click="duplicateStrategy()" ng-show="editingMode" class="btn btn-info" title="Duplicate strategy"><span class="glyphicon glyphicon-duplicate"></span></button>
           <button ng-click="delStrategy()" ng-show="editingMode" class="btn btn-danger" title="Delete strategy" ng-disabled=false><span class="glyphicon glyphicon-remove"></span></button>
         </span>
+
       </div>
       
       <div id="dialog3" title="Strategy">
@@ -987,12 +994,14 @@
 
       <div ng-show="accountsRedeemed(true).length==0">
         Table 1/2: Active Accounts: None
+
+        <button ng-show="editingMode" class="btn btn-info addAccount">Add account</button>
       </div>
 
       <table class="table table-hover" ng-show="accountsRedeemed(true).length!=0">
         <caption>Table 1/2: Active Accounts</caption>
         <thead><tr>
-           <th><button id="addAccount" ng-show="editingMode" class="btn btn-info">Add account</button></th>
+           <th><button ng-show="editingMode" class="btn btn-info addAccount">Add account</button></th>
            <th>From {{getEadsName()}}</th>
            <th>Account</th>
            <th>Strategy</th>
@@ -1660,7 +1669,7 @@
 
     </div><!-- end partial redemptions -->
 
-    <div id="Backend">
+    <div id="Backend" ng-controller="BackendCtrl">
       <a href="https://github.com/shadiakiki1986/the-allocator/wiki"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;General Back-end Help</a>
 
       <ul>

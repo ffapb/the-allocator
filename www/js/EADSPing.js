@@ -2,12 +2,9 @@ function EADSPing($scope,$http) {
 
   $scope.pingStatus=0;
   $scope.pingEads = function() {
-        if(!$scope.$parent.config.api.EADS) {
-          console.log("EADS not configured");
-          return;
-        }
+        if(!$scope.$parent.getEads()) return;
 
-        var base = $scope.$parent.config.api.EADS + "?type=accounts&prefix=";
+        var base = $scope.$parent.getEads() + "?type=accounts&prefix=";
         $scope.pingStatus=1;
         $http.get(
             base+"AB1343" // example account to test with
