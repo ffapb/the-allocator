@@ -84,8 +84,13 @@ function PricesBatch($scope,$http) {
 
 
   $scope.fetchEpdsCore = function(latest,secId,succFn,errFn) {
+        if(!$scope.$parent.config.api.EPDS) {
+          errFn("EPDS not configured");
+          return;
+        }
+
         $http({
-          url: "api/fetchEpds.php",
+          url: $scope.$parent.config.api.EPDS,
           method: "POST",
           data: {
             id: angular.toJson(secId),
@@ -134,7 +139,7 @@ function PricesBatch($scope,$http) {
 
         $scope.pingEpdsStatus = 1;
         $http({
-          url: "api/fetchEpds.php",
+          url: $scope.$parent.config.api.EPDS,
           method: "POST",
           data: {
             id: '["FIDLHKI LX EQUITY"]',
@@ -157,6 +162,8 @@ function PricesBatch($scope,$http) {
           }
         );
   };
+
+  $scope.$on("loadedBackend2",function() { $scope.pingEpdsFn(); });
 
   angular.element(document).ready(function () {
     $scope.pingEpdsFn();

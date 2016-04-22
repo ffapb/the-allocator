@@ -11,8 +11,8 @@ function SaveLocalRemote($scope,$http) {
       "accounts": $scope.$parent.accounts,
       "securities": $scope.$parent.securities,
       "prices": $scope.$parent.prices,
-      "partialRedemptions": $scope.$parent.partialRedemptions,
-      "config": $scope.$parent.config
+      "partialRedemptions": $scope.$parent.partialRedemptions //,
+      //"config": $scope.$parent.config
   // don't save this //            "versioning": $scope.$parent.versioning
     };
 
@@ -62,10 +62,15 @@ function SaveLocalRemote($scope,$http) {
   };
   $scope.sosStatus = "None";
   $scope.saveOnServer = function() {
+    if(!$scope.$parent.config.api.RemoteSave) {
+      console.error("Server saving is not configured");
+      return;
+    }
+
     console.log("Save on server",self.unComplementData());
     $scope.sosStatus = "Uploading";
     $http({
-      url: "api/saveOnServer.php",
+      url: $scope.$parent.config.api.RemoteSave,
       method: "POST",
       data: {
         data: angular.toJson(self.unComplementData()), //  self.data2json(),
@@ -97,7 +102,7 @@ function SaveLocalRemote($scope,$http) {
     $scope.$parent.prices = {};
     $scope.$parent.trades = [];
     $scope.$parent.partialRedemptions = {};
-    $scope.$parent.config = $scope.$parent.configInit;
+    //$scope.$parent.config = $scope.$parent.configInit;
     $scope.$parent.versioning = {};
   };
 
@@ -116,7 +121,7 @@ function SaveLocalRemote($scope,$http) {
       $scope.$parent.securities = d2j.securities;
       $scope.$parent.prices = d2j.prices;
       if(d2j.partialRedemptions) $scope.$parent.partialRedemptions = d2j.partialRedemptions;
-      $scope.$parent.config = d2j.config;
+      //$scope.$parent.config = d2j.config;
       self.complementData();
     }
 
@@ -126,8 +131,12 @@ function SaveLocalRemote($scope,$http) {
     }
   };
   $scope.getRemote = function() {
+    if(!$scope.$parent.config.api.RemoteDownload) {
+      console.error("Server Download is not configured");
+      return;
+    }
     $scope.sosStatus="Loading";
-    $http.get("api/loadFromServer.php").
+    $http.get($scope.$parent.config.api.RemoteDownload,{params:{asEads:true}}).
       success(function(data,status,headers,config) {
         console.log("Loaded from server",data);
         $scope.reset();
@@ -136,7 +145,7 @@ function SaveLocalRemote($scope,$http) {
         $scope.$parent.securities = data.securities;
         $scope.$parent.prices = data.prices;
         $scope.$parent.partialRedemptions = data.partialRedemptions;
-        $scope.$parent.config = data.config;
+        //$scope.$parent.config = data.config;
 
         // complementing the data is necessary since the server data is uncomplemented when uploaded
         self.complementData();

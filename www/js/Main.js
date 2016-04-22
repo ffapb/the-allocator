@@ -13,7 +13,11 @@ function Main($scope) {
       ServerVersion: "",
       EADS: "",
       EPDS: "",
-      excel: ""
+      excel: "",
+      EadsName: "",
+      EpdsName: "",
+      RemoteDownload: "",
+      RemoteSave: ""
     }
   };
   $scope.config = angular.fromJson(angular.toJson($scope.configInit));
@@ -67,9 +71,8 @@ function Main($scope) {
     $scope.$broadcast("edited2");
   });
 
-  $scope.$on("savedOnServer",function() {
-    $scope.$broadcast("savedOnServer2");
-  });
+  $scope.$on("savedOnServer",function() { $scope.$broadcast("savedOnServer2"); });
+  $scope.$on("loadedBackend",function() { $scope.$broadcast("loadedBackend2"); });
 
   $scope.pricesLength = function() {
      var tot=0;

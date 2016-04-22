@@ -18,6 +18,8 @@ function EADSPing($scope,$http) {
           });
   };
 
+  $scope.$on("loadedBackend2",function() { $scope.pingEads(); });
+
   angular.element(document).ready(function () {
       $scope.pingEads();
   });

@@ -15,6 +15,7 @@ function ServerVersion($scope,$http) {
   });
 
   $scope.$on("savedOnServer2",function() { $scope.getVersion(); });
+  $scope.$on("loadedBackend2",function() { $scope.getVersion(); });
 
   $scope.getVersion = function() {
     if(!$scope.$parent.config.api.ServerVersion) {

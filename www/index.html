@@ -1720,6 +1720,21 @@
 	    <input ng-model="config.api.EpdsName" placeholder="e.g. Market map adapter" />
 	  </span>
 	</li>
+        <li>Remote download:
+	  <span ng-show="!editingMode && !!config.api.RemoteDownload">{{config.api.RemoteDownload}}</span>
+	  <span ng-show="!editingMode && !config.api.RemoteDownload">Not configured</span>
+	  <span ng-show=" editingMode">
+	    <input ng-model="config.api.RemoteDownload" placeholder="e.g. /ffa-mfe/the-allocator-ffa/api/loadFromServer.php" />
+	  </span>
+	</li>
+        <li>Remote save:
+	  <span ng-show="!editingMode && !!config.api.RemoteSave">{{config.api.RemoteSave}}</span>
+	  <span ng-show="!editingMode && !config.api.RemoteSave">Not configured</span>
+	  <span ng-show=" editingMode">
+	    <input ng-model="config.api.RemoteSave" placeholder="e.g. /ffa-mfe/the-allocator-ffa/api/saveOnServer.php" />
+	  </span>
+	</li>
+
       </ul>
 
     </div><!-- end backend -->
