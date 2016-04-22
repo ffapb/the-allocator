@@ -59,19 +59,24 @@ function SecuritiesPriceDates($scope) {
     $scope.$emit("edited");
   };
 
-  $scope.delSecuritiesOnlyInPrices = function() {
+  $scope.delSecuritiesOnlyInPricesAll = function() {
           var anyDeleted = false;
           for(sec in $scope.$parent.securities) {
-            if(!$scope.strategyUsingSecurity(sec)&&
-               !$scope.accountUsingSecurity(sec)&&
-                $scope.pricesUsingSecurity(sec)) {
-              delete $scope.$parent.securities[sec]; 
-              delete $scope.$parent.prices[sec]; 
-              anyDeleted = true;
-            }
+            anyDeleted = anyDeleted || $scope.delSecuritiesOnlyInPricesSingle(sec);
           }
 
           if(anyDeleted) $scope.$emit("edited");
+  };
+
+  $scope.delSecuritiesOnlyInPricesSingle = function(sec) {
+    if(!$scope.strategyUsingSecurity(sec)&&
+       !$scope.accountUsingSecurity(sec)&&
+        $scope.pricesUsingSecurity(sec)) {
+      delete $scope.$parent.securities[sec]; 
+      delete $scope.$parent.prices[sec]; 
+      return true;
+    }
+    return false;
   };
 
   $scope.existsSecuritiesOnlyInPrices = function() {

@@ -28,7 +28,8 @@ function Trades($scope) {
               if(Math.abs(perc)>=$scope.$parent.config.riskThreshold) {
                 var usd = perc/100*$scope.$parent.accounts[x].currentAmount;
                 var pxDate = $scope.$parent.securities[z.id].pxDate;
-                var shares = usd / $scope.$parent.priceByIdDate(z.id,pxDate);
+                var rate = (!!acs2[acs[j]].allocations[k].rate2usd?acs2[acs[j]].allocations[k].rate2usd:1);
+                var shares = usd / $scope.$parent.priceByIdDate(z.id,pxDate) / rate;
                 var id = $scope.tradeid(y[i].name,x,z.id);
     
                 trades[id] = {
@@ -49,6 +50,7 @@ function Trades($scope) {
     }
     $scope.$parent.trades = trades;
     self.setTradesPooledBySecurity();
+    if(!!$scope.viewAsAccount) $scope.setTradesSingleAccount();
   };
 
   $scope.$on("loaded2", function() {

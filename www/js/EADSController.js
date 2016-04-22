@@ -31,6 +31,7 @@ function EADSController($scope,$http,$q,$timeout) {
       a.name == b.name &&
       a.inception == b.inception &&
       a.rm == b.rm &&
+      a.broker == b.broker &&
       a.navMonthStart == b.navMonthStart &&
       a.navYearStart == b.navYearStart &&
       a.cash == b.cash);
@@ -54,6 +55,7 @@ function EADSController($scope,$http,$q,$timeout) {
         $scope.$parent.newAccount.name = ac.name;
         $scope.$parent.newAccount.inception = ac.inception;
         $scope.$parent.newAccount.rm = ac.rm;
+        $scope.$parent.newAccount.broker = ac.broker;
         $scope.$parent.newAccount.navMonthStart = ac.navMonthStart;
         $scope.$parent.newAccount.navYearStart = ac.navYearStart;
         $scope.$parent.newAccount.cash = ac.cash;
@@ -201,6 +203,7 @@ function EADSController($scope,$http,$q,$timeout) {
           target.name = rd.entity;
           target.inception = rd.CLI_OPEN_DATE.substr(0,10);
           target.rm = rd.rm;
+          target.broker = rd.broker;
 
           $scope.getAccountNav(
             null,

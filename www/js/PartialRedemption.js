@@ -6,6 +6,14 @@ function PartialRedemption($scope) {
      return !!Number($scope.newPartRed.value) && $scope.newPartRed.accountId && $scope.newPartRed.redOrSub;
   };
   $scope.add = function() {
+    var ppp=$scope.$parent.partialRedemptions;
+    if(ppp.constructor === Array) {
+      if(ppp.length==0) {
+        $scope.$parent.partialRedemptions={};
+      } else {
+        console.error("Invalid format for partial redemptions");
+      }
+    }
     $scope.$parent.partialRedemptions[$scope.newPartRed.accountId] = {
             id: $scope.newPartRed.accountId,
             value: $scope.newPartRed.value,

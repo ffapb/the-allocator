@@ -394,98 +394,107 @@
     </div><!-- end PriceAddEdit -->
 
     <div id="SecurityAddEdit" ng-controller="SecurityAddEdit">
-      <div class="text-center" ng-show="editingMode" ng-controller="SecuritiesPriceDates" id="SecuritiesPriceDates">
-        <button ng-click="setAllPriceDatesLatest()" ng-show="!allPriceDatesLatest()" class="btn btn-success" >
-          Use latest prices
-        </button>
+      <div ng-controller="SecuritiesPriceDates" id="SecuritiesPriceDates">
+        <div class="text-center" ng-show="editingMode">
+          <button ng-click="setAllPriceDatesLatest()" ng-show="!allPriceDatesLatest()" class="btn btn-success" >
+            Use latest prices
+          </button>
 
-        <br>
-            Change price dates for all securities: 
-            <select ng-model="priceDatesUse">
-              <option
-                ng-repeat="pr in priceDates()"
-                value="{{pr}}" >
-                  {{pr}}
-              </option>
-            </select>
-            <label><input type="checkbox" ng-model="useLastAvailable"> Use last available date if unavailable</label>
-         <button ng-click="setAllPriceDates()" class="btn btn-info" ng-disabled="priceDatesUse==''" >
-          Use price date
-        </button>
+          <br>
+              Change price dates for all securities: 
+              <select ng-model="priceDatesUse">
+                <option
+                  ng-repeat="pr in priceDates()"
+                  value="{{pr}}" >
+                    {{pr}}
+                </option>
+              </select>
+              <label><input type="checkbox" ng-model="useLastAvailable"> Use last available date if unavailable</label>
+           <button ng-click="setAllPriceDates()" class="btn btn-info" ng-disabled="priceDatesUse==''" >
+            Use price date
+          </button>
 
-        <br>
-        <button class="btn btn-danger" ng-click="delSecuritiesOnlyInPrices()" ng-show="existsSecuritiesOnlyInPrices()">Delete securities only used by prices</button>
+          <br>
+          <button class="btn btn-danger" ng-click="delSecuritiesOnlyInPricesAll()" ng-show="existsSecuritiesOnlyInPrices()">Delete securities only used by prices</button>
+        </div><!-- end div ng-show-->
 
-      </div>
-
-      <table class="table table-hover">
-        <caption>
-          Table 1/1
-          <small class="text-warning">Securities available in strategies/accounts/prices tabs cannot be deleted</small>
-        </caption>
-        <thead><tr>
-          <th>
-            <button id="addSecurity" ng-show="editingMode" class="btn btn-primary"
-              ng-disabled="false" title="Add security"
-              >
-              <span class="glyphicon glyphicon-plus"></span>
-            </button>
-          </th>
-          <th>Class</th>
-          <th>Name</th>
-          <th>ID</th>
-          <th>ISIN</th>
-          <th>Price date</th>
-          <th class="mynumbertd">Price</th>
-          <th ng-show="editingMode">Used by</th>
-        </tr></thead>
-        <tbody>
-          <tr ng-show="securitiesLength()==0"><td>None</td></tr>
-        </tbody>
-        <tbody>
-          <tr ng-repeat="sec in obj2arr(securities) | orderBy: ['class','name']">
-            <td>
-              <button ng-show="editingMode" ng-click="delSecurity(sec.id)" class="btn btn-danger"
-                ng-disabled="strategyUsingSecurity(sec.id)||accountUsingSecurity(sec.id)||pricesUsingSecurity(sec.id)"
-                title="Delete security"
+        <table class="table table-hover">
+          <caption>
+            Table 1/1
+            <small class="text-warning">Securities available in strategies/accounts/prices tabs cannot be deleted</small>
+          </caption>
+          <thead><tr>
+            <th>
+              <button id="addSecurity" ng-show="editingMode" class="btn btn-primary"
+                ng-disabled="false" title="Add security"
                 >
-                <span class="glyphicon glyphicon-remove"></span>
+                <span class="glyphicon glyphicon-plus"></span>
               </button>
-              <button ng-show="editingMode" ng-click="editSecurity(sec.id)" ng-disabled="false"
-                class="btn btn-default" title="Edit security"
-                >
-                <span class="glyphicon glyphicon-pencil"></span>
-              </button>
-            </td>
-            <td>
-              <span ng-show="!sec.classManual">{{sec.classOriginal}}</span>
-              <span ng-show="!!sec.classManual">
-                <strike>{{sec.classOriginal}}</strike>
-                <br>
-                {{sec.classManual}}
-              </span>
-            </td>
-            <td>{{sec.name}}</td>
-            <td>{{sec.id}}</td>
-            <td>{{sec.isin}}</td>
-            <td>
-              {{sec.pxDate}}
-              <div ng-show="sec.pxDate=='latest'">
-              ({{priceDateLatestById(sec.id)}})
-              </div>
-            </td>
-            <td class="mynumbertd">{{priceByIdDate(sec.id,sec.pxDate)}}</td>
-            <td>
-              <ul ng-show="editingMode">
-                <li ng-show="!strategyUsingSecurity(sec.id)&&!accountUsingSecurity(sec.id)&&!pricesUsingSecurity(sec.id)">Nothing</li>
-                <li ng-show="strategyUsingSecurity(sec.id)">Strategy</li>
-                <li ng-show="accountUsingSecurity(sec.id)">Account</li>
-                <li ng-show="pricesUsingSecurity(sec.id)">Prices</li>
-              </ul>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+            </th>
+            <th>Class</th>
+            <th>Name</th>
+            <th>ID</th>
+            <th>ISIN</th>
+            <th>Price date</th>
+            <th class="mynumbertd">Price</th>
+            <th ng-show="editingMode">Used by</th>
+          </tr></thead>
+          <tbody>
+            <tr ng-show="securitiesLength()==0"><td>None</td></tr>
+          </tbody>
+          <tbody>
+            <tr ng-repeat="sec in obj2arr(securities) | orderBy: ['class','name']">
+              <td>
+                <button ng-show="editingMode && !pricesUsingSecurity(sec.id)"
+                  ng-click="delSecurity(sec.id)" class="btn btn-danger"
+                  ng-disabled="strategyUsingSecurity(sec.id)||accountUsingSecurity(sec.id)"
+                  title="Delete security"
+                  >
+                  <span class="glyphicon glyphicon-remove"></span>
+                </button>
+                <button ng-show="editingMode && pricesUsingSecurity(sec.id)"
+                  ng-click="delSecuritiesOnlyInPricesSingle(sec.id)" class="btn btn-danger"
+                  ng-disabled="strategyUsingSecurity(sec.id)||accountUsingSecurity(sec.id)"
+                  title="Delete security (with prices)"
+                  >
+                  <span class="glyphicon glyphicon-remove"></span>
+                </button>
+                <button ng-show="editingMode" ng-click="editSecurity(sec.id)" ng-disabled="false"
+                  class="btn btn-default" title="Edit security"
+                  >
+                  <span class="glyphicon glyphicon-pencil"></span>
+                </button>
+              </td>
+              <td>
+                <span ng-show="!sec.classManual">{{sec.classOriginal}}</span>
+                <span ng-show="!!sec.classManual">
+                  <strike>{{sec.classOriginal}}</strike>
+                  <br>
+                  {{sec.classManual}}
+                </span>
+              </td>
+              <td>{{sec.name}}</td>
+              <td>{{sec.id}}</td>
+              <td>{{sec.isin}}</td>
+              <td>
+                {{sec.pxDate}}
+                <div ng-show="sec.pxDate=='latest'">
+                ({{priceDateLatestById(sec.id)}})
+                </div>
+              </td>
+              <td class="mynumbertd">{{priceByIdDate(sec.id,sec.pxDate)}}</td>
+              <td>
+                <ul ng-show="editingMode">
+                  <li ng-show="!strategyUsingSecurity(sec.id)&&!accountUsingSecurity(sec.id)&&!pricesUsingSecurity(sec.id)">Nothing</li>
+                  <li ng-show="strategyUsingSecurity(sec.id)">Strategy</li>
+                  <li ng-show="accountUsingSecurity(sec.id)">Account</li>
+                  <li ng-show="pricesUsingSecurity(sec.id)">Prices</li>
+                </ul>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div><!-- end SecuritiesPricesDates -->
 
           <div id="dialog5" title="Security">
             <form>
@@ -816,12 +825,13 @@
                 <li>Current Amount: {{ac.currentAmount|number:2}} USD</li>
                 <li>Cash: {{ac.cash|number:2}} USD ({{ac.cash/ac.currentAmount*100|number:2}} %)</li>
                 <li>RM: {{ac.rm}}</li>
+                <li>Broker: {{ac.broker}}</li>
                 <li>Nav month start: {{ac.navMonthStart|number:2}} USD</li>
                 <li>MTD: {{ac.mtd|number:2}} %</li>
                 <li>Nav year start: {{ac.navYearStart|number:2}} USD</li>
                 <li>YTD: {{ac.ytd|number:2}} %</li>
                 <li>Return SI: {{ac.returnSI|number:2}} %</li>
-                <li>Total fees: {{((ac.total.paid-ac.total.cost-(!!ac.feesOther?ac.feesOther:0))/ac.initialInvestment-1)*100|number:2}} USD</li>
+                <!--<li>Total fees: {{((ac.total.paid-ac.total.cost-(!!ac.feesOther?ac.feesOther:0))/ac.initialInvestment-1)*100|number:2}} USD</li>-->
               </ul>
             </div><!-- tabs-12 -->
   
@@ -832,31 +842,31 @@
                   <td>
                     <span ng-show="!editingMode">{{!ac.feesMan?0:ac.feesMan|number:2}}</span>
                     <span ng-show=" editingMode"><input type="number" min=0 max=100 step=0.01 ng-model="ac.feesMan" placeholder="e.g. 3 for 3%" ng-change="emitEdited()"></span>
-                    %
+                    % of initial investment {{ac.initialInvestment|number:2}} USD
                     <br> ({{(!!ac.feesMan?ac.feesMan:0)/100*ac.initialInvestment|number:2}} USD)
                   </td>
                 </tr>
-                <tr>
+                <!--<tr>
                   <td style="text-align:right">Final Investment: </td>
                   <td>{{ac.initialInvestment - (!!ac.feesMan?ac.feesMan:0)/100*ac.initialInvestment|number:2}}</td>
-                </tr>
+                </tr>-->
                 <tr>
                   <td style="text-align:right">Entry fees: </td>
                   <td>
                     <span ng-show="!editingMode">{{!ac.feesEntry?0:ac.feesEntry|number:2}}</span>
-                    <span ng-show=" editingMode"><input type="number" min=0 max=100 step=0.01 ng-model="ac.feesEntry" placeholder="e.g. 3 for 3%" ng-change="emitEdited()"></span>
-                    %
-                    <br> ({{(!!ac.feesEntry?ac.feesEntry:0)/100*(ac.initialInvestment - (!!ac.feesMan?ac.feesMan:0)/100*ac.initialInvestment)|number:2}} USD)</td>
+                    <span ng-show=" editingMode"><input type="number" min=0 step=1 ng-model="ac.feesEntry" placeholder="e.g. 300 for 300 USD" ng-change="emitEdited()"></span>
+                    USD
+                    <br> ({{(!!ac.feesEntry?ac.feesEntry:0)/ac.initialInvestment*100|number:2}} % of initial investment {{ac.initialInvestment|number:2}} USD)</td>
                 </tr>
-                <tr>
+                <!--<tr>
                   <td style="text-align:right">Investment Amount after Fees: </td>
                   <td>{{ac.initialInvestment*(1-(!!ac.feesMan?ac.feesMan:0)/100)*(1-(!!ac.feesEntry?ac.feesEntry:0)/100)|number:2}}</td>
-                </tr>
+                </tr>-->
                 <tr>
                   <td style="text-align:right">Funds: </td>
                   <td>
                     {{ac.total.fundsUsd|number:2}} USD
-                    <br>({{ac.total.fundsUsd/ac.currentAmount*100|number:2}} %)
+                    <br>({{ac.total.fundsUsd/ac.currentAmount*100|number:2}} % of current amount {{ac.currentAmount|number:2}} USD)
                   </td>
                 </tr>
                 <tr>
@@ -867,7 +877,15 @@
                     USD
                   </td>
                 </tr>
-
+                <tr>
+                  <td style="text-align:right">Custody fees: </td>
+                  <td>
+                    <span ng-show="!editingMode">{{!ac.feesCustody?0:ac.feesCustody|number:2}}</span>
+                    <span ng-show=" editingMode"><input type="number" min=0 max=100 step=0.01 ng-model="ac.feesCustody" placeholder="e.g. 3 for 3%" ng-change="emitEdited()"></span>
+                    % of current amount {{ac.currentAmount|number:2}} USD
+                    <br> ({{(!!ac.feesCustody?ac.feesCustody:0)/100*ac.currentAmount|number:2}} USD)
+                  </td>
+                </tr>
               </table>
             </div><!-- tabs-13 -->
    
@@ -878,10 +896,25 @@
                   <th>Class</th>
                   <th>Security</th>
                   <th style="text-align:right">Target</th>
-                  <th style="text-align:right">Allocation</th>
-                  <th style="text-align:right">Performance</th>
+                  <th style="text-align:right">
+                    Allocation &nbsp;
+                    <span title="Allocation = price * shares * rate / (portfolio+cash)">
+                      <button disabled style="color:pink"><span class="glyphicon glyphicon-flag"></span></button>
+                    </span>
+                  </th>
+                  <th style="text-align:right">
+                    Performance &nbsp;
+                    <span title="Performance = NAV / Total cost * 100 or 0 if total cost = 0 (from 'USD' tab)">
+                      <button disabled style="color:pink"><span class="glyphicon glyphicon-flag"></span></button>
+                    </span>
+                  </th>
                   <th style="text-align:right">Weighted performance</th>
-                  <th style="text-align:right">Avg cost</th>
+                  <th style="text-align:right">
+                    Avg cost &nbsp;
+                    <span title="From {{getEadsName()}}">
+                      <button disabled style="color:pink"><span class="glyphicon glyphicon-flag"></span></button>
+                    </span>
+                  </th>
                   <th style="text-align:right">Price</th>
                   <th style="text-align:right">Num shares</th>
                </tr></thead>
@@ -948,7 +981,7 @@
                       <div ng-show="!!ac.allocations[al.id].currency && ac.allocations[al.id].currency!='USD'"><small><i>Same FX as for NAV</i></small></div>
                     </td>
                     <td class="mynumbertd">{{ac.allocations[al.id].targetAllocUsd|number:2}} <small>USD</small></td>
-                    <td class="mynumbertd">{{ac.allocations[al.id].targetAllocUsd - ac.allocations[al.id].nav|number:2}} <small>USD</small></td>
+                    <td class="mynumbertd">{{ac.allocations[al.id].targetAllocUsd - ac.allocations[al.id].nav*ac.allocations[al.id].rate2usd|number:2}} <small>USD</small></td>
                     <td class="mynumbertd">{{ac.allocations[al.id].targetShares|number:2}} <small>shares</small></td>
                     <td class="mynumbertd">{{ac.allocations[al.id].pendingShares|number:2}} <small>shares</small></td>
                   </tr>
@@ -1036,6 +1069,8 @@
               {{accounts[ac].name.substr(0,20)}}
               <br>
               <i>RM: {{accounts[ac].rm}}</i>
+              <br>
+              <i>Broker: {{accounts[ac].broker}}</i>
             </td>
             <td>
               <div ng-show="!editingMode">{{accounts[ac].strategy}}</div>
@@ -1139,6 +1174,7 @@
            <th>NAV</th>
            <th>Net Performance</th>
            <th>RM</th>
+           <th>Broker</th>
         </tr></thead>
         <tbody>
           <tr ng-repeat="ac in accountsRedeemed(false)">
@@ -1157,6 +1193,7 @@
             <td class="mynumbertd">{{accounts[ac].currentAmount|number:2}}</td>
             <td class="mynumbertd">{{accounts[ac].returnSI|number:2}}</td>
             <td>{{accounts[ac].rm}}</td>
+            <td>{{accounts[ac].broker}}</td>
           </tr>
         </tbody>
       </table><!-- end table of redeemed accounts -->
@@ -1266,6 +1303,13 @@
                 <td>
                   <input ng-show="editingMode" class="form-control" placeholder="e.g. Yousef Chahine" ng-model="newAccount.rm" ng-disabled="newAccount.fromEADS" />
                   <span ng-show="!editingMode">{{newAccount.rm}}</span>
+                </td>
+              </tr>
+              <tr>
+                <td style="text-align:right;white-space:nowrap">Broker:</td>
+                <td>
+                  <input ng-show="editingMode" class="form-control" placeholder="e.g. Yousef Chahine" ng-model="newAccount.broker" ng-disabled="newAccount.fromEADS" />
+                  <span ng-show="!editingMode">{{newAccount.broker}}</span>
                 </td>
               </tr>
               <tr>
@@ -1476,7 +1520,7 @@
       <div>
         Allowed deviation:
         <span ng-show="!editingMode">{{config.riskThreshold|number:2}} %</span>
-        <span ng-show=" editingMode"><input type="number" ng-model="config.riskThreshold" placeholder="e.g. 3 for 3%" min=0 max=100 step=0.1 ng-change="emitEdited()"> %</span>
+        <span ng-show=" editingMode"><input type="number" ng-model="config.riskThreshold" placeholder="e.g. 3 for 3%" min=0 max=100 step=0.1 ng-change="emitEdited()" ng-disabled="1==0"> %</span>
       </div>
 
       View:
