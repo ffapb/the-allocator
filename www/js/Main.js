@@ -5,6 +5,7 @@ function Main($scope) {
   $scope.securities = {};
   $scope.prices = {};
   $scope.trades = [];
+  $scope.configSource="/the-allocator-config.json";
   $scope.configInit = {
     riskThreshold: 0,
     title1: "The Allocator",

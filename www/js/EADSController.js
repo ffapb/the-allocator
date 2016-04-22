@@ -395,7 +395,7 @@ function EADSController($scope,$http,$q,$timeout) {
           "pxDate": ac[i].CRS_DAT,
           "px": ac[i].CRS_TIT,
           "currency": !!ac[i].currency?ac[i].currency:"",
-          "source": "EADS"
+          "source": $scope.$parent.getEadsName()
         };
       }
 

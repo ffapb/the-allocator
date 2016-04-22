@@ -11,8 +11,12 @@ function SaveLocalRemote($scope,$http) {
       "accounts": $scope.$parent.accounts,
       "securities": $scope.$parent.securities,
       "prices": $scope.$parent.prices,
-      "partialRedemptions": $scope.$parent.partialRedemptions //,
-      //"config": $scope.$parent.config
+      "partialRedemptions": $scope.$parent.partialRedemptions,
+      "config": {
+        riskThreshold: $scope.$parent.config.riskThreshold,
+        title1: $scope.$parent.config.title1,
+        title2: $scope.$parent.config.title2
+      }
   // don't save this //            "versioning": $scope.$parent.versioning
     };
 
@@ -102,7 +106,9 @@ function SaveLocalRemote($scope,$http) {
     $scope.$parent.prices = {};
     $scope.$parent.trades = [];
     $scope.$parent.partialRedemptions = {};
-    //$scope.$parent.config = $scope.$parent.configInit;
+    $scope.$parent.config.riskThreshold = $scope.$parent.configInit.riskThreshold;
+    //$scope.$parent.config.title1 = $scope.$parent.configInit.title1;
+    //$scope.$parent.config.title2 = $scope.$parent.configInit.title2;
     $scope.$parent.versioning = {};
   };
 
@@ -121,7 +127,9 @@ function SaveLocalRemote($scope,$http) {
       $scope.$parent.securities = d2j.securities;
       $scope.$parent.prices = d2j.prices;
       if(d2j.partialRedemptions) $scope.$parent.partialRedemptions = d2j.partialRedemptions;
-      //$scope.$parent.config = d2j.config;
+      $scope.$parent.config.riskThreshold = d2j.config.riskThreshold;
+      if(!!d2j.config.title1) $scope.$parent.config.title1 = d2j.config.title1;
+      if(!!d2j.config.title2) $scope.$parent.config.title2 = d2j.config.title2;
       self.complementData();
     }
 
@@ -145,7 +153,9 @@ function SaveLocalRemote($scope,$http) {
         $scope.$parent.securities = data.securities;
         $scope.$parent.prices = data.prices;
         $scope.$parent.partialRedemptions = data.partialRedemptions;
-        //$scope.$parent.config = data.config;
+        $scope.$parent.config.riskThreshold = data.config.riskThreshold;
+        if(!!data.config.title1) $scope.$parent.config.title1 = data.config.title1;
+        if(!!data.config.title2) $scope.$parent.config.title2 = data.config.title2;
 
         // complementing the data is necessary since the server data is uncomplemented when uploaded
         self.complementData();

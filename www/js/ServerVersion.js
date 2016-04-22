@@ -24,10 +24,6 @@ function ServerVersion($scope,$http) {
     }
 
     $scope.$parent.gvSt="Getting";
-    $scope.versioningRemote.appVersion = "-";
-    $scope.versioningRemote.appDate = "-";
-    $scope.versioningRemote.dataVersion = "-";
-    $scope.versioningRemote.dataDate = "-";
 
     $http.get($scope.$parent.config.api.ServerVersion).
       then(function(response) {

@@ -80,6 +80,7 @@ function Trades($scope) {
     }
 
     // accumulating
+    eadsName=$scope.$parent.getEadsName()
     for(tr in trs) {
       trac = $scope.$parent.accounts[trs[tr].account];
       var id = trs[tr].security+'-'+trs[tr].sign+(!trac.fromEADS?"":"-"+trac.eadsSource); // distinguish sells from buys and lebanon from dubai
@@ -91,7 +92,7 @@ function Trades($scope) {
           sign: trs[tr].sign,
           usd: trs[tr].usd,
           shares: trs[tr].shares,
-          source: !trac.fromEADS?"Non-eads":"EADS "+trac.eadsSource
+          source: !trac.fromEADS?"Non-"+eadsName:eadsName+" "+trac.eadsSource
         };
       } else {
         tr2[id].usd = tr2[id].usd + trs[tr].usd;

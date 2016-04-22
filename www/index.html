@@ -55,8 +55,8 @@
               <input ng-model="config.title1" placeholder="Title for page" style="width:10em" ng-change="emitEdited()" />
               <input ng-model="config.title2" placeholder="Subtitle for page" style="width:10em" ng-change="emitEdited()" />
             </span>
-            <a href="https://github.com/shadiakiki1986/the-allocator"><img src="images/github.png" /></a>
-            <a href="https://github.com/shadiakiki1986/the-allocator/wiki"><span class="glyphicon glyphicon-info-sign"></span></a>
+            <a href="https://github.com/shadiakiki1986/the-allocator" target="_blank"><img src="images/github.png" /></a>
+            <a href="https://github.com/shadiakiki1986/the-allocator/wiki" target="_blank"><span class="glyphicon glyphicon-info-sign"></span></a>
           </h2>
         </div>
         <div class="pull-right">
@@ -1166,7 +1166,7 @@
         <table class="table">
         <tr>
           <td>
-            <label><input type="checkbox" ng-model="newAccount.fromEADS" ng-change="possiblesCore()" ng-disabled="!eadsAvail" /> From {{getEadsName()}}</label>
+            <label><input type="checkbox" ng-model="newAccount.fromEADS" ng-change="possiblesCore()" ng-disabled="!eadsAvail||!editingMode" /> From {{getEadsName()}}</label>
             <br>{{newAccount.eadsSource}}
           </td>
           <td>
@@ -1251,7 +1251,7 @@
                 <td style="text-align:right;white-space:nowrap">Inception:</td>
                 <td>
                   <input ng-show="editingMode" class="form-control" placeholder="e.g. 2015-04-03" ng-model="newAccount.inception" ng-disabled="newAccount.fromEADS" />
-                  <span ng-show="!editingMode">{{!newAccount.inception}}</span>
+                  <span ng-show="!editingMode">{{newAccount.inception}}</span>
                 </td>
               </tr>
               <tr>
@@ -1473,6 +1473,12 @@
     <div id="Trades" ng-controller="Trades">
       <!--<button ng-click="setTrades()">Refresh</button>-->
 
+      <div>
+        Allowed deviation:
+        <span ng-show="!editingMode">{{config.riskThreshold|number:2}} %</span>
+        <span ng-show=" editingMode"><input type="number" ng-model="config.riskThreshold" placeholder="e.g. 3 for 3%" min=0 max=100 step=0.1 ng-change="emitEdited()"> %</span>
+      </div>
+
       View:
       <select ng-model="viewAs">
         <option value="default">Default</option>
@@ -1670,69 +1676,55 @@
     </div><!-- end partial redemptions -->
 
     <div id="Backend" ng-controller="BackendCtrl">
-      <a href="https://github.com/shadiakiki1986/the-allocator/wiki"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;General Back-end Help</a>
+      <a href="https://github.com/shadiakiki1986/the-allocator/wiki/External-data-sources" target="_blank"><span class="glyphicon glyphicon-info-sign"></span>&nbsp;General Back-end Help</a>
+
+      <div>
+        Config source
+        :
+        <span ng-show="!editingMode && !!configSource">{{configSource}}</span>
+        <span ng-show="!editingMode && !configSource">Not set</span>
+        <span ng-show=" editingMode">
+          <input ng-model="configSource" placeholder="e.g. http://8.8.8.8/the-allocator-config.json" />
+        </span>
+      </div>
 
       <ul>
         <li>
           Server version
           :
-	  <span ng-show="!editingMode && !!config.api.ServerVersion">{{config.api.ServerVersion}}</span>
-	  <span ng-show="!editingMode && !config.api.ServerVersion">Not configured</span>
-	  <span ng-show=" editingMode">
-	    <input ng-model="config.api.ServerVersion" placeholder="e.g. api/ServerVersion.php" />
-	  </span>
+	  <span ng-show="!!config.api.ServerVersion">{{config.api.ServerVersion}}</span>
+	  <span ng-show="!config.api.ServerVersion">Not configured</span>
 	</li>
         <li>
           EADS
           <a href="https://github.com/shadiakiki1986/the-allocator/wiki/External-Accounts-Data-Source-%28EADS%29"><span class="glyphicon glyphicon-info-sign"></span></a>
           :
-	  <span ng-show="!editingMode && !!config.api.EADS">{{config.api.EADS}}</span>
-	  <span ng-show="!editingMode && !config.api.EADS">Not configured</span>
-	  <span ng-show=" editingMode">
-	    <input ng-model="config.api.EADS" placeholder="e.g. api/getEads.php" />
-	  </span>
+	  <span ng-show="!!config.api.EADS">{{config.api.EADS}}</span>
+	  <span ng-show="!config.api.EADS">Not configured</span>
 	</li>
         <li>EPDS:
-	  <span ng-show="!editingMode && !!config.api.EPDS">{{config.api.EPDS}}</span>
-	  <span ng-show="!editingMode && !config.api.EPDS">Not configured</span>
-	  <span ng-show=" editingMode">
-	    <input ng-model="config.api.EPDS" placeholder="e.g. api/fetchEpds.php" />
-	  </span>
+	  <span ng-show="!!config.api.EPDS">{{config.api.EPDS}}</span>
+	  <span ng-show="!config.api.EPDS">Not configured</span>
 	</li>
         <li>Excel export:
-	  <span ng-show="!editingMode && !!config.api.excel">{{config.api.excel}}</span>
-	  <span ng-show="!editingMode && !config.api.excel">Not configured</span>
-	  <span ng-show=" editingMode">
-	    <input ng-model="config.api.excel" placeholder="e.g. api/export2excel.php" />
-	  </span>
+	  <span ng-show="!!config.api.excel">{{config.api.excel}}</span>
+	  <span ng-show="!config.api.excel">Not configured</span>
 	</li>
         <li>EADS Name:
-	  <span ng-show="!editingMode && !!config.api.EadsName">{{config.api.EadsName}}</span>
-	  <span ng-show="!editingMode && !config.api.EadsName">Not configured</span>
-	  <span ng-show=" editingMode">
-	    <input ng-model="config.api.EadsName" placeholder="e.g. Marketflow" />
-	  </span>
+	  <span ng-show="!!config.api.EadsName">{{config.api.EadsName}}</span>
+	  <span ng-show="!config.api.EadsName">Not configured</span>
 	</li>
         <li>EPDS Name:
-	  <span ng-show="!editingMode && !!config.api.EpdsName">{{config.api.EpdsName}}</span>
-	  <span ng-show="!editingMode && !config.api.EpdsName">Not configured</span>
-	  <span ng-show=" editingMode">
-	    <input ng-model="config.api.EpdsName" placeholder="e.g. Market map adapter" />
-	  </span>
+	  <span ng-show="!!config.api.EpdsName">{{config.api.EpdsName}}</span>
+	  <span ng-show="!config.api.EpdsName">Not configured</span>
 	</li>
         <li>Remote download:
-	  <span ng-show="!editingMode && !!config.api.RemoteDownload">{{config.api.RemoteDownload}}</span>
-	  <span ng-show="!editingMode && !config.api.RemoteDownload">Not configured</span>
-	  <span ng-show=" editingMode">
-	    <input ng-model="config.api.RemoteDownload" placeholder="e.g. /ffa-mfe/the-allocator-ffa/api/loadFromServer.php" />
-	  </span>
+	  <span ng-show="!!config.api.RemoteDownload">{{config.api.RemoteDownload}}</span>
+	  <span ng-show=" !config.api.RemoteDownload">Not configured</span>
 	</li>
         <li>Remote save:
-	  <span ng-show="!editingMode && !!config.api.RemoteSave">{{config.api.RemoteSave}}</span>
-	  <span ng-show="!editingMode && !config.api.RemoteSave">Not configured</span>
-	  <span ng-show=" editingMode">
-	    <input ng-model="config.api.RemoteSave" placeholder="e.g. /ffa-mfe/the-allocator-ffa/api/saveOnServer.php" />
-	  </span>
+	  <span ng-show="!!config.api.RemoteSave">{{config.api.RemoteSave}}</span>
+	  <span ng-show=" !config.api.RemoteSave">Not configured</span>
 	</li>
 
       </ul>
