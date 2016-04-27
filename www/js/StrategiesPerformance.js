@@ -32,5 +32,4 @@ function StrategiesPerformance($scope) {
     $scope.$emit("edited");
   };
 
-
 }

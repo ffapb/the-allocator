@@ -188,6 +188,13 @@
           <th ng-repeat="st in strategies" style="text-align:right">{{st.name}}</th>
         </tr></thead>
         <tbody>
+          <tr>
+            <td><i>Inception</i></td>
+            <td ng-repeat="st in strategies" class="mynumbertd"><i>
+              <span ng-show=" st.perfStart">{{st.perfStart}}</span>
+              <span ng-show="!st.perfStart">-</span>
+            </i></td>
+          </tr>
           <tr ng-show="performanceTimestamps().length==0"><td>None</td></tr>
           <tr ng-repeat="ts in performanceTimestamps()">
             <td>{{ts}}</td>
@@ -195,6 +202,13 @@
               <span ng-show=" st.performance[ts]">{{st.performance[ts]|number:2}} %</span>
               <span ng-show="!st.performance[ts]">-</span>
             </td>
+          </tr>
+          <tr>
+            <td><i>End</i></td>
+            <td ng-repeat="st in strategies" class="mynumbertd"><i>
+              <span ng-show=" st.perfEnd">{{st.perfEnd}}</span>
+              <span ng-show="!st.perfEnd">-</span>
+            </i></td>
           </tr>
         </tbody>
         <thead ng-show="performanceTimestamps().length!=0">
@@ -736,9 +750,41 @@
 
         </div><!-- tabs-1 -->
 
-        <div id="StrategiesPerformance" ng-controller="StrategiesPerformance">
+        <div id="StrategiesPerformance" ng-controller="StrategiesPerformance" style="max-width:500px">
           <table class="table">
-            <tr><th>Year</th><th>Performance in %</th></tr>
+            <tr>
+              <th>Year</th>
+              <th>
+                Performance in % &nbsp;
+                <span title="Annualized for years of inception/end dates">
+                  <button disabled style="color:pink"><span class="glyphicon glyphicon-flag"></span></button>
+                </span>
+              </th>
+              <th>&nbsp;</th></tr>
+            <tr>
+              <td>Inception</td>
+              <td>
+                <span ng-show="!editingMode">{{strategies[selected].perfStart}}</span>
+                <span ng-show=" editingMode"><input ng-model="strategies[selected].perfStart"></span>
+              </td>
+              <td>&nbsp;</td>
+            </tr>
+            <tr>
+              <td colspan=3>
+                <div class="alert alert-danger" ng-show="strategies[selected].perfStart < perfDtRange(strategies[selected],'start').min">
+                  <span class="glyphicon glyphicon-exclamation-sign"></span>
+                  Date is before minimum: {{perfDtRange(strategies[selected],'start').min}}
+                </div>
+                <div class="alert alert-danger" ng-show="strategies[selected].perfStart > perfDtRange(strategies[selected],'start').max">
+                  <span class="glyphicon glyphicon-exclamation-sign"></span>
+                  Date is after maximum: {{perfDtRange(strategies[selected],'start').max}}
+                </div>
+                <div class="alert alert-danger" ng-show="!dateIsValid(strategies[selected].perfStart)">
+                  <span class="glyphicon glyphicon-exclamation-sign"></span>
+                  Date is invalid (should be YYYY-mm-dd)
+                </div>
+              </td>
+            </tr>
             <tr ng-show="performanceTimestamps().length==0"><td>None</td></tr>
             <tbody ng-show="performanceTimestamps().length>0">
               <tr ng-repeat="ts in performanceTimestamps()">
@@ -751,8 +797,34 @@
                 </td>
                 <td><button class="btn btn-danger" ng-show="editingMode" ng-click="del(ts)"><span class="glyphicon glyphicon-remove"></span></button></td>
               </tr>
-              <tr><th>SI</th><th>{{calcSI(strategies[selected])|number:2}} %</th></tr>
-              <tr><th>Annualized</th><th>{{calcAnn(strategies[selected])|number:2}} %</th></tr>
+              <tr>
+                <td>End date</td>
+                <td>
+                  <span ng-show="!editingMode">{{strategies[selected].perfEnd}}</span>
+                  <span ng-show=" editingMode"><input ng-model="strategies[selected].perfEnd"></span>
+                </td>
+                <td>&nbsp;</td>
+              </tr>
+
+              <tr>
+                <td colspan=3>
+                  <div class="alert alert-danger" ng-show="strategies[selected].perfEnd < perfDtRange(strategies[selected],'end').min">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    Date is before minimum: {{perfDtRange(strategies[selected],'end').min}}
+                  </div>
+                  <div class="alert alert-danger" ng-show="strategies[selected].perfEnd > perfDtRange(strategies[selected],'end').max">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    Date is after maximum: {{perfDtRange(strategies[selected],'end').max}}
+                  </div>
+                  <div class="alert alert-danger" ng-show="!dateIsValid(strategies[selected].perfEnd)">
+                    <span class="glyphicon glyphicon-exclamation-sign"></span>
+                    Date is invalid (should be YYYY-mm-dd)
+                  </div>
+                </td>
+              </tr>
+
+              <tr><th>SI</th><th>{{calcSI(strategies[selected])|number:2}} %</th><th>&nbsp;</th></tr>
+              <tr><th>Annualized</th><th>{{calcAnn(strategies[selected])|number:2}} %</th><th>&nbsp;</th></tr>
             </tbody>
             <tr ng-show="editingMode">
               <td><input ng-model="newStratPerf.y" placeholder="e.g. YYYY" /></td>

@@ -151,13 +151,55 @@ function Main($scope) {
 
   //-------------------------------
   // StrategiesPerformance functions moved here
+  $scope.perfDtRange = function(strat,type) {
+    // strat = strategies[selected]
+    var defOut = {"min":"0000-00-00","max":"9999-99-99", "d0":"N/A", "d1": "N/A"};
+
+    if(!strat) return defOut;
+    var dates=Object.keys(strat.performance);
+    if(type=="end" && dates.length<2) return defOut;
+
+    //dates=dates.filter(function(x) { return !!Number(x); });
+    dates.sort();
+    var d0 = dates[0];
+    var d1 = d0;
+    if(type=="end") {
+      d0=dates[dates.length-1];
+      d1=dates[dates.length-2];
+      d1=Number(d1)+1+"";
+    }
+    return {"min":d1+"-01-01","max":d1+"-12-31","d0":d0,"d1":d1};
+  };
+
   $scope.calcSI = function(s) {
     // s: strategy
     // var s = $scope.strategies[$scope.selected];
     if(!s) return; // still booting
     if(!s.performance) return;
+    
+    var o = $scope.obj2arr(s.performance).reduce(function(a,b) { return a*(1+b/100); }, 1);
+    
+    // correct for perfStart
+    o=o/$scope.calcCorrector(s,"start",s.perfStart);
+    // correct for perfEnd
+    o=o/$scope.calcCorrector(s,"end",s.perfEnd);
+    // final
+    o=100*(o-1);
+    return o;
+  };
 
-    return ($scope.obj2arr(s.performance).reduce(function(a,b) { return a*(1+b/100); }, 1)-1)*100;
+  $scope.calcCorrector=function(s,type,perfDt) {
+    // correct for perfStart or perfEnd
+    // type: "start"
+    var psr = $scope.perfDtRange(s,type);
+    if(!!perfDt && $scope.dateIsValid(perfDt) && perfDt>=psr.min && perfDt<=psr.max) {
+      var comp = type=="start"?psr.min:psr.max;
+      var ndays = moment(perfDt).diff(moment(comp),"days");
+      ndays = Math.abs(ndays);
+      var o =Math.pow((100+s.performance[psr.d0])/100,ndays/365);
+      return o;
+    }
+    return 1;
   };
 
   $scope.calcAnn = function(s) {
@@ -166,8 +208,9 @@ function Main($scope) {
     if(!s.performance) return 0;
     if(Object.keys(s.performance).length==0) return 0;
     res = $scope.calcSI(s)/100+1;
-    res = Math.pow(res,1/Object.keys(s.performance).length)-1;
-    return res*100;
+    res = Math.pow(res,1/Object.keys(s.performance).length);
+    res=100*(res-1);
+    return res;
   };
 
   $scope.performanceTimestamps = function(base) {

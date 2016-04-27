@@ -46,6 +46,7 @@ The following list of features is as of ''2015-10-11''
 * can set a "manual" class for a security that is not overridden by the EADS refresh (which overrides the "original" class)
 * Check server-side below for a list of features that are server-side and which can be configured in the app
  * automatic config loaded if the app finds `/the-allocator-config.json` on the server (only works when app is installed on local server, and not githubpages used)
+* Strategy performances take into account the inception/current dates and correct the "SI" performance using the "annualized" performances entered
 
 # Installation
 
