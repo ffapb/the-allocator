@@ -60,9 +60,6 @@ function PartialRedemption($scope) {
           // var usd = perc/100 * acs[j].currentAmount;
 
           // Method 2: redeem and rebalance at the same time
-          if(k=="7") {
-            console.log("qewrty",j,k,acs[j].currentAmount,redValSigned,stri.allocations[k].allocation,z.allocation);
-          }
           var usd = (acs[j].currentAmount + redValSigned)*stri.allocations[k].allocation/100 - z.allocation/100*acs[j].currentAmount;
           var perc = 100*usd/acs[j].currentAmount;
 

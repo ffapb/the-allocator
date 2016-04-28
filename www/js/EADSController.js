@@ -302,6 +302,12 @@ function EADSController($scope,$http,$q,$timeout) {
           var rd = response.data;
           target.allocations = {};
           for(i in rd) {
+            // manual override .. work in progress
+            //if(rd[i].OPE_TIT_COD=="UK IGLO") {
+            //  rd[i].OPE_TIT_COD="US IGLO";
+            //  // rd[i] = $scope.$parent.securities["US IGLO"]...
+            //}
+
             target.allocations[rd[i].OPE_TIT_COD] = {
               "id": rd[i].OPE_TIT_COD,
               "numShares": rd[i].qty,
@@ -372,6 +378,8 @@ function EADSController($scope,$http,$q,$timeout) {
             "pxDate": "latest",
             "isin":  !!ac[i].isin?ac[i].isin:""
           };
+        } else {
+          console.error("Couldnt add security "+ac[i].id);
         }
       } else {
         sec.id = ac[i].id;
