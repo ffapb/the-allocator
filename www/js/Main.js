@@ -156,6 +156,7 @@ function Main($scope) {
     var defOut = {"min":"0000-00-00","max":"9999-99-99", "d0":"N/A", "d1": "N/A"};
 
     if(!strat) return defOut;
+    if(!strat.performance) return defOut;
     var dates=Object.keys(strat.performance);
     if(type=="end" && dates.length<2) return defOut;
 

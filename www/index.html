@@ -149,9 +149,14 @@
           </span>
         </a>
       </li>
-      <li><a href="#PartialRedemption">Partial Redemptions / Subscriptions <span class="badge">{{partialRedemptionsLength()}}</span></a></li>
-
-
+      <li>
+        <a href="#PartialRedemption">
+          Partial Redemptions / Subscriptions <span class="badge">{{partialRedemptionsLength()}}</span>
+        </a>
+        <span title="Trades for redemptions will also rebalance to save on trading costs.">
+          <button disabled style="color:pink"><span class="glyphicon glyphicon-flag"></span></button>
+        </span>
+      </li>
       <li><a href="#Backend">Back-end</a></li>
     </ul>
 
@@ -1717,12 +1722,13 @@
       <div class="row">
       <div class="col-md-8 col-md-offset-2">
         <table class="table table-hover">
-          <caption>Table 1/1</caption>
+          <caption>Table 1/2</caption>
           <tr>
             <th>Account</th>
             <th style="text-align:right">Nav</th>
             <th>Redemption / Subscription</th>
             <th style="text-align:right">Value in USD</th>
+            <th>&nbsp;</th>
           </tr>
           <tr ng-show="editingMode">
             <td>
@@ -1745,7 +1751,7 @@
             </td>
           </tr>
           <tr ng-show="partialRedemptionsLength()==0">
-            <td>No redemptions / subscriptions</td>
+            <td colspan=5 class="alert alert-warning">No redemptions / subscriptions</td>
           </tr>
           <tr ng-repeat="prd in partialRedemptions">
             <td>{{prd.id}}</td>
@@ -1763,7 +1769,7 @@
       </div><!-- end row -->
       
       <table class="table table-hover">
-        <caption>Table 1/2: {{prTradesLength()}} trades</caption>
+        <caption>Table 2/2: {{prTradesLength()}} trades</caption>
         <thead><tr>
           <th>Account</th>
           <th>Security</th>
@@ -1774,7 +1780,7 @@
         </tr></thead>
         <tbody ng-show="prTradesLength()==0">
           <tr>
-            <td colspan=4>None</td>
+            <td colspan=6 class="alert alert-warning">None</td>
           </tr>
         </tbody>
         <tbody>

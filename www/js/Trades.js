@@ -12,29 +12,29 @@ function Trades($scope) {
     var dm = new DataManager($scope.$parent.strategies, $scope.$parent.accounts, $scope.$parent.securities);
 
     trades = {};
-    var y = $scope.$parent.strategies;
-    for(i in y) {
+    var str = $scope.$parent.strategies;
+    for(i in str) {
       var acs2 = $scope.$parent.accounts;
-      var acs = Object.keys(acs2).filter(function(x) { return acs2[x].strategy==y[i].name; });
+      var acs = Object.keys(acs2).filter(function(x) { return acs2[x].strategy==str[i].name; });
       for(j in acs) {
-        for(k in y[i].allocations) {
-          if(!!y[i].allocations[k]) {
-            if(y[i].allocations[k].allocation!=0 ||
+        for(k in str[i].allocations) {
+          if(!!str[i].allocations[k]) {
+            if(str[i].allocations[k].allocation!=0 ||
                (acs2[acs[j]].allocations.hasOwnProperty(k) && acs2[acs[j]].allocations[k].allocation!=0)
               ) {
               var x = acs[j];
-              var z = y[i].allocations[k];
+              var z = str[i].allocations[k];
               var perc = dm.allocDiffCore(x,z);
               if(Math.abs(perc)>=$scope.$parent.config.riskThreshold) {
                 var usd = perc/100*$scope.$parent.accounts[x].currentAmount;
                 var pxDate = $scope.$parent.securities[z.id].pxDate;
                 var rate = (!!acs2[acs[j]].allocations[k].rate2usd?acs2[acs[j]].allocations[k].rate2usd:1);
                 var shares = usd / $scope.$parent.priceByIdDate(z.id,pxDate) / rate;
-                var id = $scope.tradeid(y[i].name,x,z.id);
+                var id = $scope.tradeid(str[i].name,x,z.id);
     
                 trades[id] = {
                   "id": id,
-                  "strategy": y[i].name,
+                  "strategy": str[i].name,
                   "account": x,
                   "security": z.id,
                   "sign": shares<0?"Buy":"Sell",

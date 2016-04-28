@@ -44,30 +44,44 @@ function PartialRedemption($scope) {
     $scope.prTrades = {};
     var prs = $scope.$parent.partialRedemptions;
     var acs = $scope.$parent.accounts;
+    var strs = $scope.$parent.strategies;
     for(j in prs) {
-      redFrac = prs[j].value * ( prs[j].redOrSub=="Subscription"?-1:1 ) / $scope.$parent.accounts[j].currentAmount; // redemption fraction
+      var stri=Object.keys(strs).filter(function(s) { return strs[s].name==acs[j].strategy; });
+      if(stri.length!=1) console.error("Why not just 1 strategy returned? "+j);
+      stri=strs[stri[0]];
+      var redValSigned = prs[j].value * ( prs[j].redOrSub=="Subscription"?1:-1 );
+      // var redFrac = redValSigned / acs[j].currentAmount; // redemption fraction
       for(k in acs[j].allocations) {
-        if(acs[j].allocations[k].allocation!=0) {
-          var x = j;
-          var z = acs[j].allocations[k];
-          var perc = redFrac * z.allocation/100 * 100;
+        var z = acs[j].allocations[k];
+        // no need to check this for Method 1
+        // if(z.allocation!=0) {
+          // Method 1: redeem independently of rebalancing required
+          // var perc = redFrac * z.allocation/100 * 100;
+          // var usd = perc/100 * acs[j].currentAmount;
 
-          var usd = perc/100 * acs[x].currentAmount;
+          // Method 2: redeem and rebalance at the same time
+          if(k=="7") {
+            console.log("qewrty",j,k,acs[j].currentAmount,redValSigned,stri.allocations[k].allocation,z.allocation);
+          }
+          var usd = (acs[j].currentAmount + redValSigned)*stri.allocations[k].allocation/100 - z.allocation/100*acs[j].currentAmount;
+          var perc = 100*usd/acs[j].currentAmount;
+
+          // Common to method 1 & 2
           var pxDate = $scope.$parent.securities[z.id].pxDate;
           var shares = usd / $scope.$parent.priceByIdDate(z.id,pxDate);
-          var id = $scope.tradeid("partialRedemption",x,z.id);
+          var id = $scope.tradeid("partialRedemption",j,z.id);
 
           $scope.prTrades[id] = {
             "id": id,
             "strategy": "partialRedemption",
-            "account": x,
+            "account": j,
             "security": z.id,
-            "sign": shares<0?"Buy":"Sell",
+            "sign": shares>0?"Buy":"Sell",
             "perc": Math.abs(perc),
             "usd": Math.abs(usd),
             "shares": Math.abs(shares)
           };
-        } // end if allocation != 0
+        // } // end if allocation != 0
       }
     }
   };
