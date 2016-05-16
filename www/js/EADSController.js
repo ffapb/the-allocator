@@ -303,10 +303,11 @@ function EADSController($scope,$http,$q,$timeout) {
           target.allocations = {};
           for(i in rd) {
             // manual override .. work in progress
-            //if(rd[i].OPE_TIT_COD=="UK IGLO") {
-            //  rd[i].OPE_TIT_COD="US IGLO";
-            //  // rd[i] = $scope.$parent.securities["US IGLO"]...
-            //}
+            if(rd[i].OPE_TIT_COD=="UK IGLO") {
+              rd[i].OPE_TIT_COD="US IGLO";
+              rd[i].aid1="BOND FUNDS"; // similar to US IGLO
+              // rd[i] = $scope.$parent.securities["US IGLO"]...
+            }
 
             target.allocations[rd[i].OPE_TIT_COD] = {
               "id": rd[i].OPE_TIT_COD,
@@ -366,6 +367,7 @@ function EADSController($scope,$http,$q,$timeout) {
   $scope.complementAllocations1 = function(target) {
     // complementary data: eads data
     var ac = target.allocations;
+    //console.log("complement 1",target);
     for(i in ac) {
       // even if securities already has this, refresh with the new data
       var sec = $scope.$parent.securities[ac[i].id];
@@ -383,15 +385,19 @@ function EADSController($scope,$http,$q,$timeout) {
         }
       } else {
         sec.id = ac[i].id;
-        sec.classOriginal = ac[i].classEADS;
+        if(!!ac[i].classEADS) {
+          if(ac[i].classEADS!=sec.classOriginal) console.error("Change in class for "+sec.id+" from "+sec.classOriginal+" to "+ac[i].classEADS+" in "+target.id);
+          sec.classOriginal = ac[i].classEADS;
+        }
         sec.name = !!ac[i].nameEADS?ac[i].nameEADS:sec.name;
         //sec.pxDate = "latest";
         sec.isin = !!ac[i].isin?ac[i].isin:sec.isin;
+        $scope.$parent.securities[ac[i].id] = sec;
       }
 
       // update the class field so that the Portfolio tab shows up with the override class
-      sec = $scope.$parent.securities[ac[i].id]; // reset
-      sec.class = !!sec.classManual?sec.classManual:sec.classOriginal;
+      sec = $scope.$parent.securities[ac[i].id]; // reset the 'sec' variable
+      $scope.$parent.securities[ac[i].id].class = !!sec.classManual?sec.classManual:sec.classOriginal;
 
       if(!$scope.$parent.prices.hasOwnProperty(ac[i].id)) {
         $scope.$parent.prices[ac[i].id] = {};

@@ -43,7 +43,8 @@ function SecurityAddEdit($scope,$timeout) {
     if(!$scope.newSecurity.hasOwnProperty("id") || $scope.newSecurity.id=="") return false;
     if(!$scope.newSecurity.hasOwnProperty("name") || $scope.newSecurity.name=="") return false;
     if(!$scope.newSecurity.hasOwnProperty("isin") || $scope.newSecurity.isin=="") return false;
-    if(!$scope.newSecurity.hasOwnProperty("classOriginal") || $scope.newSecurity.classOriginal=="") return false;
+    // no real need for this .. can be empty
+    // if(!$scope.newSecurity.hasOwnProperty("classOriginal") || $scope.newSecurity.classOriginal=="") return false;
     // Don't check on price date
     // if(!$scope.newSecurity.hasOwnProperty("pxDate") || $scope.newSecurity.pxDate=="") return false;
     return true;

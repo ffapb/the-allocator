@@ -1823,6 +1823,10 @@
           :
           <span ng-show="!!config.api.EADS">{{config.api.EADS}}</span>
           <span ng-show="!config.api.EADS">Not configured</span>
+          <ul>
+            Examples
+            <li><a href='{{getEads()+"?type=portfolios&cid_=AB1343&format=json&base=Lebanon"}}'>portfolios</a></li>
+          </ul>
         </li>
         <li>EPDS:
           <span ng-show="!!config.api.EPDS">{{config.api.EPDS}}</span>
