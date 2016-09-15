@@ -3,7 +3,7 @@ The Allocator helps an asset manager replicate his/her strategy's allocations on
 
 It is published at http://shadiakiki1986.github.io/the-allocator/
 
-For app help, check the repository's wiki (link in sidebar)
+For app help, check the repository's [wiki](https://github.com/shadiakiki1986/the-allocator/wiki)
 
 # Alternatives
 Check [Alternatives](Alternatives.md)
