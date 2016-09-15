@@ -6,7 +6,7 @@ It is published at http://shadiakiki1986.github.io/the-allocator/
 For app help, check the repository's wiki (link in sidebar)
 
 # Alternatives
-Check [[Alternatives]]
+Check [Alternatives](Alternatives.md)
 
 # Acronyms
 I use the following acronyms in this document
