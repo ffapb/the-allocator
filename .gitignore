@@ -10,3 +10,4 @@ www/css/vendor/images/*
 www/css/fonts/*
 !www/css/fonts/empty.txt
 vendor/*
+www/the-allocator-config.json

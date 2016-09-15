@@ -68,7 +68,7 @@ They can augment the app's features with the following:
 I will write more on the API end-points data format later
 
 # License
-Licensed under the WTFPL. Check [LICENSE] for the full license text.
+Licensed under the WTFPL. Check [LICENSE](LICENSE.md) for the full license text.
 
 # Publishing to gh-pages
 
