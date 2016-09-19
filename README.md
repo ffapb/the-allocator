@@ -8,6 +8,8 @@ For app help, check the repository's [wiki](https://github.com/shadiakiki1986/th
 A dockerfile is included in the repository for hosting in-house.
 It is on [docker hub](hub.docker.com) with `docker pull shadiakiki1986/the-allocator`
 
+To use with docker: `docker run -d -p 80:80 shadiakiki1986/the-allocator`
+
 To import your own config file for the backend (details below), using `docker-compose`:
 ```
   the-allocator-frontend:

@@ -1,9 +1,11 @@
 FROM shadiakiki1986/nginx-npm
 MAINTAINER Shadi Akiki
 
-# continue with my own commands
+RUN apk add --no-cache make 
+COPY . /code/the-allocator
+WORKDIR /code/the-allocator
+RUN make install && \
+    mv www/* /usr/share/nginx/html/
+
 WORKDIR /usr/share/nginx/html/
-COPY . .
-RUN apk add --no-cache make && \
-    make install
 
