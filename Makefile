@@ -1,5 +1,5 @@
 install:
-	bower install
+	bower install --allow-root
 	cp bower_components/angular/angular.min.js www/js/vendor/angular-1.4.7.min.js
 	cp bower_components/jquery/dist/jquery.min.js www/js/vendor/jquery-2.1.4.min.js
 	cp bower_components/jquery-ui/jquery-ui.min.js www/js/vendor/jquery-ui-1.11.4.min.js

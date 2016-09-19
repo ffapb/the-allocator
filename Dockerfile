@@ -1,10 +1,9 @@
-FROM nginx:alpine
+FROM shadiakiki1986/nginx-npm
 MAINTAINER Shadi Akiki
 
+# continue with my own commands
 WORKDIR /usr/share/nginx/html/
-RUN apk add --no-cache nodejs npm git mercurial && \
-    npm install -g bower && \
-    git clone --depth 1 https://github.com/shadiakiki1986/the-allocator.git && \
-    mv the-allocator/* . && \
+COPY . .
+RUN apk add --no-cache make && \
     make install
 

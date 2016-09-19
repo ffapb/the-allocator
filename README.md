@@ -6,6 +6,8 @@ It is published at http://shadiakiki1986.github.io/the-allocator/
 For app help, check the repository's [wiki](https://github.com/shadiakiki1986/the-allocator/wiki)
 
 A dockerfile is included in the repository for hosting in-house.
+It is on [docker hub](hub.docker.com) with `docker pull shadiakiki1986/the-allocator`
+
 To import your own config file for the backend (details below), using `docker-compose`:
 ```
   the-allocator-frontend:
