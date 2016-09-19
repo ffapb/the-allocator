@@ -5,6 +5,18 @@ It is published at http://shadiakiki1986.github.io/the-allocator/
 
 For app help, check the repository's [wiki](https://github.com/shadiakiki1986/the-allocator/wiki)
 
+A dockerfile is included in the repository for hosting in-house.
+To import your own config file for the backend (details below), using `docker-compose`:
+```
+  the-allocator-frontend:
+    image: shadiakiki1986/the-allocator
+    volumes:
+    - ./path/to/config.json:/var/www/html/
+    depends_on:
+    - the-allocator-backend
+```
+where `config.json` has references to the backend URL such as `http://the-allocator-backend/getServer.php`
+
 # Alternatives
 Check [Alternatives](Alternatives.md)
 
