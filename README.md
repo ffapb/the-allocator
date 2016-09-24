@@ -21,6 +21,8 @@ To import your own config file for the backend (details below), using `docker-co
 ```
 where `config.json` has references to the backend URL such as `http://the-allocator-backend/getServer.php`
 
+To run against a sample backend, check [the-allocator-backend-sample](https://github.com/shadiakiki1986/the-allocator-backend-sample)
+
 # Alternatives
 Check [Alternatives](Alternatives.md)
 
@@ -101,3 +103,6 @@ If there were any "new" files that were added, a "git add" is needed in "gh-page
 Finally, return to master branch
 
     git checkout master
+
+# Dev notes
+* Serve pages with `php -S localhost:6543 -t www` instead of just opening the file with `firefox www/index.html` to avoid the `restricted URI` error when trying to get `/the-allocator-config.json`
