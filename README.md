@@ -8,20 +8,25 @@ For app help, check the repository's [wiki](https://github.com/shadiakiki1986/th
 A dockerfile is included in the repository for hosting in-house.
 It is on [docker hub](hub.docker.com) with `docker pull shadiakiki1986/the-allocator`
 
-To use with docker: `docker run -d -p 80:80 shadiakiki1986/the-allocator`
+# Usage
+Below I describe two main usages: vanilla and with custom config.
 
-To import your own config file for the backend (details below), using `docker-compose`:
-```
-  the-allocator-frontend:
-    image: shadiakiki1986/the-allocator
-    volumes:
-    - ./path/to/config.json:/var/www/html/
-    depends_on:
-    - the-allocator-backend
-```
-where `config.json` has references to the backend URL such as `http://the-allocator-backend/getServer.php`
-
+The config file is for the backend (details below).
+It has references to the backend URL such as `http://the-allocator-backend/getServer.php`
 To run against a sample backend, check [the-allocator-backend-sample](https://github.com/shadiakiki1986/the-allocator-backend-sample)
+
+
+To run with docker
+* vanilla: `docker run --rm -p 6543:80 shadiakiki1986/the-allocator`
+* With custom config file: `docker run --rm -p 6543:80 -v $(pwd)/path/to/the-allocator-config.json:/usr/share/nginx/html/the-allocator-config.json shadiakiki1986/the-allocator`
+
+To run with docker-compose
+* vanilla
+```
+  allocator:
+    image: shadiakiki1986/the-allocator
+```
+* with custom config file for the backend (details below), using `docker-compose`: check [the-allocator-backend-sample](https://github.com/shadiakiki1986/the-allocator-backend-sample)
 
 # Alternatives
 Check [Alternatives](Alternatives.md)
