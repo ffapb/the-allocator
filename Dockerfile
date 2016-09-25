@@ -5,7 +5,7 @@ RUN apk add --no-cache make
 COPY . /code/the-allocator
 WORKDIR /code/the-allocator
 RUN make install && \
-    mv www/* /usr/share/nginx/html/
+    cp -r www/* /usr/share/nginx/html/
 
-WORKDIR /usr/share/nginx/html/
+# WORKDIR /usr/share/nginx/html/
 
