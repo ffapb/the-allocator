@@ -33,7 +33,7 @@ function ServerVersion($scope,$http) {
         $scope.versioningRemote.dataDate = response.data.dataDate;
         $scope.$parent.gvSt="None";
       }, function(errResponse) {
-        console.log("http get server version err");
+        console.log("http get server version err",errResponse);
         $scope.versioningRemote.appVersion = "N/A";
         $scope.versioningRemote.appDate = "N/A";
         $scope.versioningRemote.dataVersion = "N/A";

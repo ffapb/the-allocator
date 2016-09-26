@@ -85,10 +85,11 @@ function PricesBatch($scope,$http) {
 
   $scope.fetchEpdsCore = function(latest,secId,succFn,errFn) {
         if(!$scope.$parent.config.api.EPDS) {
-          errFn("EPDS not configured");
+          errFn("EPDS not configured #2");
           return;
         }
 
+        errFn("EPDS now configured #2");
         $http({
           url: $scope.$parent.config.api.EPDS,
           method: "POST",
@@ -133,9 +134,11 @@ function PricesBatch($scope,$http) {
   $scope.pingEpdsStatus = 0;
   $scope.pingEpdsFn = function() {
         if(!$scope.$parent.config.api.EPDS) {
-          console.log("EPDS not configured");
+          console.log("EPDS not configured #1");
           return;
         }
+
+        console.log("EPDS now configured #1");
 
         $scope.pingEpdsStatus = 1;
         $http({
