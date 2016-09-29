@@ -317,7 +317,6 @@ function Main($scope) {
       console.log("EADS not configured");
       return false;
     }
-    console.log("EADS now configured");
     return $scope.config.api.EADS;
   };
 

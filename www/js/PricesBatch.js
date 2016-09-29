@@ -89,7 +89,6 @@ function PricesBatch($scope,$http) {
           return;
         }
 
-        errFn("EPDS now configured #2");
         $http({
           url: $scope.$parent.config.api.EPDS,
           method: "POST",
@@ -137,8 +136,6 @@ function PricesBatch($scope,$http) {
           console.log("EPDS not configured #1");
           return;
         }
-
-        console.log("EPDS now configured #1");
 
         $scope.pingEpdsStatus = 1;
         $http({
