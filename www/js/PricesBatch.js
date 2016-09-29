@@ -23,6 +23,16 @@ function PricesBatch($scope,$http) {
     return false;
   };
 
+  $scope.fetchEpdsDefaultList = function() {
+    return Object.keys($scope.$parent.securities)
+      .map(function(x) { return $scope.$parent.securities[x].isin; })
+      .filter(function(x) { return !!x; });
+  };
+
+  $scope.fetchEpdsEnabled = function() {
+    return $scope.fbSt=='Getting'||$scope.fbSt=='Getting latest'||$scope.fetchEpdsDefaultList().length>0;
+  };
+
   $scope.fbSt = "None";
   $scope.epdsFetchDate="";
   $scope.fetchEpds = function(latest,secId) {
@@ -31,7 +41,10 @@ function PricesBatch($scope,$http) {
           $("#epdsFetchDateDiv").addClass("has-error");
           return;
         }
-        if(!secId) secId = Object.keys($scope.$parent.securities).map(function(x) { return $scope.$parent.securities[x].isin; }).filter(function(x) { return !!x; });
+        if(!secId) {
+          secId = $scope.fetchEpdsDefaultList();
+        }
+
         
         $scope.fbSt=!!latest?"Getting latest":"Getting";
 
@@ -40,7 +53,7 @@ function PricesBatch($scope,$http) {
           secId,
           function(response) {
             if(response.data.length==0) {
-              $scope.fbSt="No data";
+              $scope.fbSt="No data received";
               return;
             }
             var anyIsins = false;
@@ -131,6 +144,7 @@ function PricesBatch($scope,$http) {
 
   $scope.epdsAvailable = false;
   $scope.pingEpdsStatus = 0;
+  $scope.pingEpdsError = "";
   $scope.pingEpdsFn = function() {
         if(!$scope.$parent.config.api.EPDS) {
           console.log("EPDS not configured #1");
@@ -138,6 +152,7 @@ function PricesBatch($scope,$http) {
         }
 
         $scope.pingEpdsStatus = 1;
+        $scope.pingEpdsError = "";
         $http({
           url: $scope.$parent.config.api.EPDS,
           method: "POST",
@@ -147,11 +162,14 @@ function PricesBatch($scope,$http) {
           }
         }).then(function(response) {
             if(Object.keys(response.data).length==0) {
+              $scope.pingEpdsError = "Error: No data";
               $scope.epdsAvailable = false;
             } else {
               if(response.data[Object.keys(response.data)[0]].px==150) {
+                $scope.pingEpdsError = "";
                 $scope.epdsAvailable = true;
               } else {
+                $scope.pingEpdsError = "Wrong ping response: "+angular.toJson(response.data);
                 $scope.epdsAvailable = false;
               }
             }
@@ -159,6 +177,7 @@ function PricesBatch($scope,$http) {
           }, function(errResponse) {
             $scope.pingEpdsStatus = 0;
             $scope.epdsAvailable=false;
+            $scope.pingEpdsError = "Error: "+errResponse;
           }
         );
   };

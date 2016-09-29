@@ -279,6 +279,8 @@
             <span ng-show="pingEpdsStatus!=1">Check again</span>
             <span ng-show="pingEpdsStatus==1">Checking...</span>
           </button>
+          &nbsp;
+          <span ng-show="!!pingEpdsError">{{pingEpdsError}}</span>
         </div>
  
         <div class="form-inline" ng-show="epdsAvailable">
@@ -288,14 +290,14 @@
             <span class="glyphicon glyphicon-ok form-control-feedback" ng-if=" validDate(epdsFetchDate)"></span>
             <span class="glyphicon glyphicon-remove form-control-feedback" ng-if="!validDate(epdsFetchDate)"></span>
           </div>
-          <button ng-click="fetchEpds()" class="btn btn-info" ng-disabled="!validDate(epdsFetchDate)||fbSt=='Getting'||fbSt=='Getting latest'">
+          <button ng-click="fetchEpds()" class="btn btn-info" ng-disabled="!validDate(epdsFetchDate)||fetchEpsEnabled()">
              <span ng-show="fbSt!='Getting'">Fetch</span>
              <span ng-show="fbSt=='Getting'">Fetching &nbsp; <img src="images/17.gif" height=21 width=21 ></span>
           </button>
 
           <br>
 
-          <button ng-click="fetchEpds(true)" class="btn btn-info" ng-disabled="fbSt=='Getting'||fbSt=='Getting latest'">
+          <button ng-click="fetchEpds(true)" class="btn btn-info" ng-disabled="fetchEpsEnabled()">
              <span ng-show="fbSt!='Getting latest'">Fetch latest prices</span>
              <span ng-show="fbSt=='Getting latest'">Fetching latest prices &nbsp; <img src="images/17.gif" height=21 width=21 ></span>
           </button>
@@ -1884,6 +1886,7 @@
  
   </div><!-- end Main -->
 
+<!-- Commenting out for faster development
   <script>
     // Google analytics for my github pages
     (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -1894,6 +1897,7 @@
     ga('create', 'UA-68799534-1', 'auto');
     ga('send', 'pageview');
   </script>
+-->
 
 </body> 
 </html> 
