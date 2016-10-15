@@ -144,8 +144,9 @@ function SaveLocalRemote($scope,$http) {
       return;
     }
     $scope.sosStatus="Loading";
-    $http.get($scope.$parent.config.api.RemoteDownload,{params:{asEads:true}}).
-      success(function(data,status,headers,config) {
+    $http.get($scope.$parent.config.api.RemoteDownload,{params:{asEads:true}})
+      .then(function(response) {
+        data = response.data;
         console.log("Loaded from server",data);
         $scope.reset();
         $scope.$parent.strategies = data.strategies;
@@ -174,8 +175,8 @@ function SaveLocalRemote($scope,$http) {
 
         // conclude
         $scope.sosStatus="None";
-      }).error(function(data,status,headers,config) {
-        console.log("Error loading from server");
+      }, function(response) {
+        console.log("Error loading from server",response);
         $scope.sosStatus="Error downloading";
       });
   };
