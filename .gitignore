@@ -11,3 +11,4 @@ www/css/fonts/*
 !www/css/fonts/empty.txt
 vendor/*
 www/the-allocator-config.json
+*swp
