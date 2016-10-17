@@ -335,6 +335,13 @@ function EADSController($scope,$http,$q,$timeout) {
   var trcRe = /^.*(equity|bond|corp)$/i;
   $scope.getSecurityIsins = function(cbfn,target) {
       // cbfn: callback function with no parameters
+
+      // for empty portfolios
+      if(Object.keys(target.allocations).length===0) {
+        console.log("No securities");
+        if(!!cbfn) cbfn();
+      }
+
       var base = $scope.$parent.getEads()+"?type=securities";
       var url = "["+Object.keys(target.allocations).map(function(x) { return '"'+x+'"'; }).join(",")+"]";
       url = base+"&sec="+url+(!!target.eadsSource?"&base="+target.eadsSource:"");
