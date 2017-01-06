@@ -111,4 +111,4 @@ Finally, return to master branch
 
 # Dev notes
 * Serve pages with `php -S localhost:6543 -t www` instead of just opening the file with `firefox www/index.html` to avoid the `restricted URI` error when trying to get `/the-allocator-config.json`
-* build docker image: `docker build . -t shadiakiki1986/the-allocator`
+* build docker image: `docker build -t shadiakiki1986/the-allocator .`
